@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+student:
+  name: 四张张
+  age: 18
+
+#配置试图重定向JSP文件的位置
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+  #数据库
+  datasource:
+    url: jdbc:mysql://localhost:3306/student?characterEncoding=UTF-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update  #新增数据库链接必备的参数
+
+#下划线转驼峰
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
