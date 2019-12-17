@@ -16,9 +16,9 @@ import java.util.Date;
  */
 @Controller
 public class HelloController {
-    @Autowired
-    private StudentProperties studentProperties;
-
+//    @Autowired
+//    private StudentProperties studentProperties;
+//
 //    @RequestMapping("/hello")
 //    public String hello() {
 //        return studentProperties.getName()+studentProperties.getAge()+"岁！";

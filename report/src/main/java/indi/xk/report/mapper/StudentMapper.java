@@ -1,6 +1,7 @@
 package indi.xk.report.mapper;
 
 import indi.xk.report.pojo.Student;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,5 +13,10 @@ import java.util.List;
  */
 @Repository
 public interface StudentMapper {
+    /**
+     * list
+     * @return
+     */
+    @Select("select * from student")
     List<Student> findAll();
 }
