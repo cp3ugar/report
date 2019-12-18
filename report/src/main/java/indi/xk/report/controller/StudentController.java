@@ -1,7 +1,7 @@
 package indi.xk.report.controller;
 
-import indi.xk.report.mapper.StudentMapper;
 import indi.xk.report.pojo.Student;
+import indi.xk.report.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,11 +17,11 @@ import java.util.List;
 @Controller
 public class StudentController{
     @Autowired
-    private StudentMapper studentMapper;
+    private StudentService studentService;
 
     @RequestMapping("/listStudent")
     public String listStudent(Model model){
-        List<Student> students = studentMapper.findAll();
+        List<Student> students = studentService.findAll();
         model.addAttribute("students",students);
         return "listStudent";
     }
