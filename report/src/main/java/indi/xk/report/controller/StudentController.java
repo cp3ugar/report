@@ -15,7 +15,7 @@ import java.util.List;
  * @Version 1.0
  */
 @Controller
-public class StudentController {
+public class StudentController{
     @Autowired
     private StudentMapper studentMapper;
 
