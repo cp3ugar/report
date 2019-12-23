@@ -1,6 +1,7 @@
 package indi.xk.report.mapper;
 
 import indi.xk.report.pojo.Student;
+import indi.xk.report.pojo.dto.StudentDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -18,5 +19,5 @@ public interface StudentMapper {
      * @return
      */
     @Select("select * from student")
-    List<Student> findAll();
+    List<StudentDTO> findAll();
 }

@@ -1,6 +1,6 @@
 package indi.xk.report.controller;
 
-import indi.xk.report.pojo.Student;
+import indi.xk.report.pojo.dto.StudentDTO;
 import indi.xk.report.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +21,7 @@ public class StudentController{
 
     @RequestMapping("/listStudent")
     public String listStudent(Model model){
-        List<Student> students = studentService.findAll();
+        List<StudentDTO> students = studentService.findAll();
         model.addAttribute("students",students);
         return "listStudent";
     }

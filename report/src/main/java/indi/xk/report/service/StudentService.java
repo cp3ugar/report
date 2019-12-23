@@ -1,6 +1,7 @@
 package indi.xk.report.service;
 
 import indi.xk.report.pojo.Student;
+import indi.xk.report.pojo.dto.StudentDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,5 +17,5 @@ public interface StudentService {
      * list
      * @return
      */
-    List<Student> findAll();
+    List<StudentDTO> findAll();
 }

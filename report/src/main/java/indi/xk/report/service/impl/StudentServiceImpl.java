@@ -2,6 +2,7 @@ package indi.xk.report.service.impl;
 
 import indi.xk.report.mapper.StudentMapper;
 import indi.xk.report.pojo.Student;
+import indi.xk.report.pojo.dto.StudentDTO;
 import indi.xk.report.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class StudentServiceImpl implements StudentService {
      * @date 2019/12/18  15:13
      */
     @Override
-    public List<Student> findAll() {
+    public List<StudentDTO> findAll() {
         return studentMapper.findAll();
     }
 }
