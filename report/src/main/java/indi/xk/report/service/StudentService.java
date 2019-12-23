@@ -18,4 +18,10 @@ public interface StudentService {
      * @return
      */
     List<StudentDTO> findAll();
+
+    /**
+     * 添加
+     * @param student
+     */
+    void addStudent(StudentDTO student);
 }

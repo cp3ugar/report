@@ -26,7 +26,7 @@ public class HelloController {
 //        return studentProperties.getName()+studentProperties.getAge()+"岁！";
 //    }
 
-    @RequestMapping("/hello")
+    @RequestMapping("/")
     public String hello(Model m) {
         m.addAttribute("now", DateFormat.getDateTimeInstance().format(new Date()));
         return "hello";

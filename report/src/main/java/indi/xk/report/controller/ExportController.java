@@ -3,6 +3,7 @@ package indi.xk.report.controller;
 import indi.xk.report.pojo.dto.StudentDTO;
 import indi.xk.report.service.StudentService;
 import indi.xk.report.utils.BaseRuntimeException;
+import indi.xk.report.utils.Utils;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,11 @@ public class ExportController {
 
     @RequestMapping("/export")
     public void exportExcel(HttpServletResponse response) throws IOException {
-            String[] headers = { "学号", "姓名","性别","年龄","出生年月"};
+            String[] headers = {"学号", "姓名","性别","年龄","出生年月"};
             List<StudentDTO> datasList= studentService.findAll();
+            if(Utils.isEmpty(datasList)){
+                throw new BaseRuntimeException(500,"没有数据可导出！");
+            }
             HSSFWorkbook workbook = new HSSFWorkbook();
             HSSFSheet sheet = workbook.createSheet();
             //设置列宽
@@ -46,7 +50,6 @@ public class ExportController {
                 StudentDTO student = datasList.get(i);
                 //从第二行开始填充数据
                 row = sheet.createRow(i+1);
-                //该集合只记录数量和时间，这两个值来自statisticsModel。如果对象比较复杂，需要额外转换，比如Date类型的日期，int，float类型的数值
                 List<String> datas = new ArrayList<>();
                 String studentId = student.getStudentId().toString();
                 String name = student.getName();

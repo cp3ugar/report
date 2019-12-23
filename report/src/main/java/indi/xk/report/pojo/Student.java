@@ -1,5 +1,7 @@
 package indi.xk.report.pojo;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @Author xk
  * @Date 2019/12/17 11:52
@@ -9,14 +11,19 @@ public class Student {
 
     private Integer id;
 
+    @NotNull(message = "学号不能为空！")
     private Integer studentId;
 
+    @NotNull(message = "姓名不能为空！")
     private String name;
 
+    @NotNull(message = "年龄不能为空！")
     private Integer age;
 
+    @NotNull(message = "性别不能为空！")
     private String sex;
 
+    @NotNull(message = "生日不能为空！")
     private String birthday;
 
     public Integer getId() {
