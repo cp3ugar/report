@@ -66,7 +66,7 @@
                     "birthday":birthday
                 },
                 success : function(data) {
-                    alert(data);
+                    alert(data.message);
                 }
             })
         }
