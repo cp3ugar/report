@@ -1,6 +1,16 @@
 server:
   port: 8080
 
+#输出sql语句
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #下划线转驼峰
+    map-underscore-to-camel-case: true
+  #配置mapper.xml路径
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  #配置映射类包名
+  type-aliases-package: indi.xk.report
 
 student:
   name: 四张张
@@ -22,11 +32,4 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update  #新增数据库链接必备的参数
-
-#输出sql语句
-mybatis:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    #下划线转驼峰
-    map-underscore-to-camel-case: true
 

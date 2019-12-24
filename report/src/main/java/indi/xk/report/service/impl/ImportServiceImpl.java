@@ -4,11 +4,13 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import indi.xk.report.mapper.StudentMapper;
 import indi.xk.report.pojo.dto.StudentDTO;
 import indi.xk.report.service.ImportService;
+import indi.xk.report.utils.Utils;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
@@ -21,6 +23,7 @@ import java.util.List;
  * @Date 2019/12/23 16:45
  * @Version 1.0
  */
+@Service
 public class ImportServiceImpl implements ImportService {
     @Autowired
     private StudentMapper studentMapper;
@@ -63,6 +66,8 @@ public class ImportServiceImpl implements ImportService {
             System.err.println(student);
         }
         //批量保存
-        studentMapper.batchInsert(students);
+        if(Utils.isNotEmpty(students)){
+            studentMapper.batchInsert(students);
+        }
     }
 }

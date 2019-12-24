@@ -8,7 +8,7 @@ import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -25,7 +25,7 @@ public class ExportController {
     @Autowired
     private StudentService studentService;
 
-    @RequestMapping("/export")
+    @GetMapping("/export")
     public void exportExcel(HttpServletResponse response) throws IOException {
             String[] headers = {"学号", "姓名","性别","年龄","出生年月"};
             List<StudentDTO> datasList= studentService.findAll();
@@ -74,7 +74,7 @@ public class ExportController {
             }
             response.setContentType("application/octet-stream");
             //Excel文件名
-            response.setHeader("Content-disposition", "attachment;filename="+"学生信息表.xls");
+            response.setHeader("Content-disposition", "attachment;filename="+"StudentInfo.xls");
             try {
                 response.flushBuffer();
             } catch (IOException e) {
