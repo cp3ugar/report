@@ -16,6 +16,7 @@ import java.util.List;
  * @Version 1.0
  */
 @Service
+
 public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentMapper studentMapper;
