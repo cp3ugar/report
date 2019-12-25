@@ -22,8 +22,8 @@
     </tr>
     <c:forEach items="${students}" var="s" varStatus="st">
         <tr>
-            <td>${s.studentId}</td>
-            <td>${s.name}</td>
+            <td>${s.jgmc}</td>
+            <td>${s.laqs}</td>
             <td>${s.sex}</td>
             <td>${s.age}岁</td>
             <td>${s.birthday}</td>
