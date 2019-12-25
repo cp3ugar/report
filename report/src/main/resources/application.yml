@@ -25,9 +25,9 @@ spring:
       suffix: .jsp
   #数据库
   datasource:
-    url: jdbc:mysql://localhost:3306/report?characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/report?characterEncoding=UTF-8&serverTimezone=UTC
     username: root
-    password: 123456
+    password: p@sswor6
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:

@@ -22,8 +22,8 @@
     </tr>
     <c:forEach items="${students}" var="s" varStatus="st">
         <tr>
-            <td>${s.jgmc}</td>
-            <td>${s.laqs}</td>
+            <td>${s.studentId}</td>
+            <td>${s.name}</td>
             <td>${s.sex}</td>
             <td>${s.age}岁</td>
             <td>${s.birthday}</td>
@@ -145,6 +145,7 @@
                 contentType : false, // 不要设置Content-Type请求头
                 success : function(data) {
                     alert(data.message);
+                    location.reload();
                 }
             })
         }
