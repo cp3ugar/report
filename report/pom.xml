@@ -63,7 +63,7 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
-            <scope>provided</scope>
+            <!--<scope>provided</scope>--> <!-- 避免只能spring-boot:run启动项目 -->
         </dependency>
 
         <!-- 集成Mybatis -->
@@ -77,8 +77,16 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.21</version>
+            <version>8.0.17</version>
         </dependency>
+
+        <!-- jxl.jar实现excel文件的获取 -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.14</version>
+        </dependency>
+
     </dependencies>
 
     <build>
