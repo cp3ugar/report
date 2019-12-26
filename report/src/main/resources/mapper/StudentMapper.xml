@@ -22,4 +22,71 @@
         )
         </foreach>
     </insert>
+
+    <insert id="batchInsert1">
+        insert into t_ssbqxx
+        (
+        bqid,ssid,bqjd,bqlx,bqfs,sflhcf,cqzt,bqqsr,bqccjz,czzt,sfxf,cfxfr,jbfg
+
+        )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.bqid},
+            #{item.ssid},
+            #{item.bqjd},
+            #{item.bqlx},
+            #{item.bqfs},
+            #{item.sflhcf},
+            #{item.cqzt},
+            #{item.bqqsr},
+            #{item.bqccjz},
+            #{item.czzt},
+            #{item.sfxf},
+            #{item.cfxfr},
+            #{item.jbfg}
+
+            )
+        </foreach>
+    </insert>
+    <insert id="batchInsert2">
+        insert into t_ssbgxx
+        (
+        bgid,mc,zjhm,ybglx,lxdh,xdz
+
+        )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.bgid},
+            #{item.mc},
+            #{item.zjhm},
+            #{item.ybglx},
+            #{item.lxdh},
+            #{item.xdz}
+
+
+            )
+        </foreach>
+    </insert>
+    <insert id="batchInsert3">
+        insert into t_ssxx
+        (
+         id,jkid,dfmc,jkrzjh,slfg,bde
+
+        )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.id},
+            #{item.jkid},
+            #{item.dfmc},
+            #{item.jkrzjh},
+            #{item.slfg},
+            #{item.bde}
+
+
+            )
+        </foreach>
+    </insert>
 </mapper>

@@ -28,5 +28,14 @@ public class ImportController {
         InputStream is = file.getInputStream();
         importService.importExcel(is);
         return ReturnObject.outSuccess("导入成功！");
+
+    }
+    @PostMapping("/import1")
+    @ResponseBody
+    public ReturnObject importExcelk(@RequestParam("file") MultipartFile file) throws IOException {
+        InputStream is = file.getInputStream();
+        importService.importExceltk(is);
+        return ReturnObject.outSuccess("导入成功！");
+
     }
 }
