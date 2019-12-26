@@ -3,7 +3,9 @@ package indi.xk.report.mapper;
 import indi.xk.report.pojo.dto.StudentDTO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -13,6 +15,7 @@ import java.util.List;
  * @Version 1.0
  */
 @Mapper
+//@Component
 public interface StudentMapper {
     /**
      * list
@@ -25,15 +28,7 @@ public interface StudentMapper {
      * 批量保存
      * @param students
      */
-    @Insert({
-            "<script>",
-            "insert into student (student_id,`name`,sex,age,birthday) values",
-            "<foreach collections='list' item='item' separator=','>",
-            "(#{item.studentId},#{item.name},#{item.sex},#{item.age},#{item.birthday})",
-            "</foreach>",
-            "</script>"
-    })
-    void batchInsert(List<StudentDTO> students);
+    void batchInsert(@Param("list") List<StudentDTO> students);
 
     /**
      * 添加

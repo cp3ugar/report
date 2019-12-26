@@ -1,5 +1,6 @@
 package indi.xk.report.pojo;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -14,16 +15,16 @@ public class Student {
     @NotNull(message = "学号不能为空！")
     private Integer studentId;
 
-    @NotNull(message = "姓名不能为空！")
+    @NotBlank(message = "姓名不能为空！")
     private String name;
 
     @NotNull(message = "年龄不能为空！")
     private Integer age;
 
-    @NotNull(message = "性别不能为空！")
+    @NotBlank(message = "性别不能为空！")
     private String sex;
 
-    @NotNull(message = "生日不能为空！")
+    @NotBlank(message = "生日不能为空！")
     private String birthday;
 
     public Integer getId() {

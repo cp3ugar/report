@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="indi.xk.report.mapper.StudentMapper">
+    <!-- 批量插入 -->
+    <insert id="batchInsert">
+        insert into student
+        (
+            student_id,
+            `name`,
+            sex,
+            age,
+            birthday
+        )
+        values
+        <foreach collection="list" item="item" separator=",">
+        (
+            #{item.studentId},
+            #{item.name},
+            #{item.sex},
+            #{item.age},
+            #{item.birthday}
+        )
+        </foreach>
+    </insert>
+</mapper>
