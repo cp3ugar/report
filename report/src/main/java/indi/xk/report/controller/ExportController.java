@@ -3,6 +3,7 @@ package indi.xk.report.controller;
 import indi.xk.report.pojo.dto.StudentDTO;
 import indi.xk.report.service.StudentService;
 import indi.xk.report.utils.BaseRuntimeException;
+import indi.xk.report.utils.PageView;
 import indi.xk.report.utils.Utils;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
@@ -29,7 +30,8 @@ public class ExportController {
     @GetMapping("/export")
     public void exportExcel(HttpServletResponse response) throws IOException {
             String[] headers = {"学号", "姓名","性别","年龄","出生年月"};
-            List<StudentDTO> datasList= studentService.findAll();
+            PageView<StudentDTO> students = studentService.findAll(null);
+            List<StudentDTO> datasList = students.getRecords();
             if(Utils.isEmpty(datasList)){
                 throw new BaseRuntimeException(500,"没有数据可导出！");
             }

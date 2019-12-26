@@ -1,139 +1,98 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+         pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html ng-app="Module">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>学生列表</title>
     <meta charset="UTF-8"/>
-    <link rel="stylesheet" href="">
+<%--    <link rel="stylesheet" href="/layui/css/layui.css">--%>
     <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+<%--    <script type="text/javascript" src="/layui/layui.js"></script>--%>
+    <script type="text/javascript" src="/js/listStudent.js"></script>
 </head>
 <body>
 <div>
-<table align='center' border='1' cellspacing='0'>
-    <tr>
-        <td>学号</td>
-        <td>姓名</td>
-        <td>性别</td>
-        <td>年龄</td>
-        <td>生日</td>
-    </tr>
-    <c:forEach items="${students}" var="s" varStatus="st">
-        <tr>
-            <td>${s.studentId}</td>
-            <td>${s.name}</td>
-            <td>${s.sex}</td>
-            <td>${s.age}岁</td>
-            <td>${s.birthday}</td>
-        </tr>
-    </c:forEach>
-</table>
-<input id="exportStu" type="button" value="导出">
+    <table id="student" lay-filter="test"></table>
 </div>
+<button id="exportStu" type="button" class="layui-btn layui-btn-primary">导出</button>
 <div id="addTable" hidden="hidden">
-    学号：<input id="studentId" type='text'>
-    姓名：<input id="name" type='text'>
-    性别：<select id="sex">
+    <%--学号：<input id="studentId" type='text'>--%>
+    <div class="layui-form-item">
+        <label class="layui-form-label">学号</label>
+        <div class="layui-input-block">
+            <input id="studentId" type="text" name="username" lay-verify="required" lay-reqtext="学号是必填项，岂能为空？"
+                   placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <%--姓名：<input id="name" type='text'>--%>
+    <div class="layui-form-item">
+        <label class="layui-form-label">姓名</label>
+        <div class="layui-input-block">
+            <input type="text" id="name" name="username" lay-verify="required" lay-reqtext="姓名是必填项，岂能为空？"
+                   placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <%--性别：<select id="sex">
         <option value="男">男</option>
         <option value="女">女</option>
-        </select>
-    年龄：<input id="age" type='number'>
-    生日：<input id="birthday" type='date'>
+        </select>--%>
+    <div class="layui-form-item">
+        <label class="layui-form-label">性别</label>
+        <div class="layui-input-block">
+            <select id="sex" name="interest" lay-filter="aihao">
+                <option value=""></option>
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+        </div>
+    </div>
+    <%--年龄：<input id="age" type='number'>--%>
+    <div class="layui-form-item">
+        <label class="layui-form-label">年龄</label>
+        <div class="layui-input-block">
+            <input id="age" type="number" name="username" lay-verify="required" lay-reqtext="年龄是必填项，岂能为空？"
+                   placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <%--生日：<input id="birthday" type='date'>--%>
+    <div class="layui-inline">
+        <label class="layui-form-label">生日</label>
+        <div class="layui-input-inline">
+            <input type="text" name="date" id="birthday" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
 </div>
-<div>
-    <input id="showAdd" type="button" value="添加学生">
-
-    <input id="addStudent" type="button" value="提交" hidden="hidden">
-    <input id="cancelAdd" type="button" value="取消" hidden="hidden">
-</div>
-<div id="showImport">
-    导入学生:<input id="stuFile" type="file" multiple="multiple">
-    <input id="importStu" type="button" value="导入">
-</div>
+    <div>
+        <%--<input id="showAdd" type="button" value="添加学生">--%>
+        <button id="showAdd" type="button" class="layui-btn layui-btn-primary">添加学生</button>
+        <button id="addStudent" type="button" class="layui-btn layui-btn-primary" hidden="hidden">提交</button>
+        <button id="cancelAdd" type="button" class="layui-btn layui-btn-primary" hidden="hidden">取消</button>
+        <%--<input id="addStudent" type="button" value="提交" hidden="hidden">
+        <input id="cancelAdd" type="button" value="取消" hidden="hidden">--%>
+    </div>
+    <div id="showImport">
+        导入:<input id="stuFile" type="file" multiple="multiple">
+        <%--    <button id="stuFile" class="layui-btn" type="file" multiple="multiple">导入</button>--%>
+<%--        <input id="importStu" type="button" value="导入">--%>
+        <button id="importStu" type="button" class="layui-btn layui-btn-primary">导入</button>
+    </div>
+<%--<div class="layui-upload" id="showImport">
+    <button id="stuFile" type="button" class="layui-btn layui-btn-normal">选择文件</button>
+    <button type="button" class="layui-btn" id="importStu">开始上传</button>
+</div>--%>
 </body>
-<script>
-    window.onload=function(){
-        var exportStu = document.getElementById("exportStu");
-        exportStu.onclick = function(){
-            $.ajax({
-                url : '/export',
-                type : 'get',
-                success : function(data) {
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+    </div>
+</script>
 
-                }
-            })
-        }
-
-        var showAdd = document.getElementById("showAdd");
-        showAdd.onclick = function(){
-            $("#addTable").show();
-            $("#showAdd").hide();
-            $("#showImport").hide();
-            $("#addStudent").show();
-            $("#cancelAdd").show();
-        }
-
-
-        var addStudent = document.getElementById("addStudent");
-        addStudent.onclick = function(){
-            var studentId = $("#studentId").val();
-            var name = $("#name").val();
-            var sex = $("#sex option:selected").val();
-            var age = $("#age").val();
-            var birthday = $("#birthday").val();
-            $.ajax({
-                url : '/addStudent',
-                type : 'post',
-                data:{
-                    "studentId":studentId,
-                    "name":name,
-                    "sex":sex,
-                    "age":age,
-                    "birthday":birthday
-                },
-                success : function(data) {
-                    $("#studentId").val('');
-                    $("#name").val('');
-                    $("#sex").val('');
-                    $("#age").val('');
-                    $("#birthday").val('');
-                    alert(data.message);
-                }
-            })
-        }
-
-        var cancelAdd = document.getElementById("cancelAdd");
-        cancelAdd.onclick = function(){
-            $("#showAdd").show();
-            $("#showImport").show();
-            $("#addStudent").hide();
-            $("#cancelAdd").hide();
-            $("#addTable").hide();
-        }
-
-        var importStu = document.getElementById("importStu");
-        importStu.onclick = function(){
-            var $file = $("#stuFile").val();//文件
-            // 判断文件是否为空
-            if ($file == "") {
-                alert("请选择上传的目标文件! ")
-                return false;
-            }
-            //判断文件类型
-            var fileName = $file.substring($file.lastIndexOf(".") + 1).toLowerCase();
-            if(fileName != "xls" && fileName !="xlsx"){
-                alert("请选择Excel文件!");
-                return false;
-            }
-            //判断文件大小
-            var size = $("#stuFile")[0].files[0].size;
-            if (size>104857600) {
-                alert("上传文件不能大于100M!");
-                return false;
-            }
-
+<<<<<<< HEAD
             var formData = new FormData();
             formData.append("file",$('#stuFile')[0].files[0]);
             $.ajax({
@@ -151,3 +110,8 @@
         }
     }
 </script>
+=======
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+>>>>>>> 81003bdf527dcb4e0e7b264c2c793443db695354

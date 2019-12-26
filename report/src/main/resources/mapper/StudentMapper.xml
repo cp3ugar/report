@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="indi.xk.report.mapper.StudentMapper">
+    <!-- 列表数量 -->
+    <select id="count" resultType="Integer">
+        select count(*) from student
+    </select>
+
+    <!-- 列表 -->
+    <select id="findAll" resultType="indi.xk.report.pojo.dto.StudentDTO">
+        select
+        id,
+        student_id,
+        `name`,
+        sex,
+        age,
+        birthday
+        from student
+        <if test="pageView != null">
+            LIMIT #{pageView.startPage},#{pageView.pageSize}
+        </if>
+    </select>
+
     <!-- 批量插入 -->
     <insert id="batchInsert">
         insert into student
@@ -23,11 +43,16 @@
         </foreach>
     </insert>
 
-    <insert id="batchInsert1">
-        insert into t_ssbqxx
+    <insert id="batchInsertSsbgxx">
+        insert into t_ssbgxx
         (
-        bqid,ssid,bqjd,bqlx,bqfs,sflhcf,cqzt,bqqsr,bqccjz,czzt,sfxf,cfxfr,jbfg
-
+            bgid,
+            ssid,
+            mc,
+            zjhm,
+            ybglx,
+            lxdh,
+            xdz
         )
         values
         <foreach collection="list" item="item" separator=",">
@@ -49,43 +74,95 @@
             )
         </foreach>
     </insert>
-    <insert id="batchInsert2">
-        insert into t_ssbgxx
-        (
-        bgid,mc,zjhm,ybglx,lxdh,xdz
 
+    <insert id="batchInsertSsbqxx">
+        insert into t_ssbqxx
+        (
+            bqid,
+            ssid,
+            bqjd,
+            bqlx,
+            bqfs,
+            sflhcf,
+            cqzt,
+            bqqsr,
+            bqccjz,
+            czzt,
+            sfxf,
+            cfxfr,
+            jbfg
         )
         values
         <foreach collection="list" item="item" separator=",">
-            (
-            #{item.bgid},
-            #{item.mc},
-            #{item.zjhm},
-            #{item.ybglx},
-            #{item.lxdh},
-            #{item.xdz}
-
-
+                #{item.bqid},
+                #{item.ssid},
+                #{item.bqjd},
+                #{item.bqlx},
+                #{item.bqfs},
+                #{item.sflhcf},
+                #{item.cqzt},
+                #{item.bqqsr},
+                #{item.bqccjz},
+                #{item.czzt},
+                #{item.sfxf},
+                #{item.cfxfr},
+                #{item.jbfg}
             )
         </foreach>
     </insert>
-    <insert id="batchInsert3">
+
+    <insert id="batchInsertSsxx">
         insert into t_ssxx
         (
-         id,jkid,dfmc,jkrzjh,slfg,bde
-
+            id,
+            jkid,
+            dfmc,
+            jkrzjh,
+            sljd,
+            slfg,
+            bde,
+            pjr,
+            pjsah,
+            org_code_ss
         )
         values
         <foreach collection="list" item="item" separator=",">
             (
-            #{item.id},
-            #{item.jkid},
-            #{item.dfmc},
-            #{item.jkrzjh},
-            #{item.slfg},
-            #{item.bde}
+                #{item.id},
+                #{item.jkid},
+                #{item.dfmc},
+                #{item.jkrzjh},
+                #{item.sljd},
+                #{item.slfg},
+                #{item.bde},
+                #{item.pjr},
+                #{item.pjsah},
+                #{item.orgCodeSs}
+            )
+        </foreach>
+    </insert>
 
-
+    <insert id="batchInsertSszxxx">
+        insert into t_sszxxx
+        (
+            zxid,
+            ssid,
+            zxah,
+            zxfy,
+            zxfg,
+            ssxmdrq,
+            sfdczxhj
+        )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+                #{item.zxid},
+                #{item.ssid},
+                #{item.zxah},
+                #{item.zxfy},
+                #{item.zxfg},
+                #{item.ssxmdrq},
+                #{item.sfdczxhj}
             )
         </foreach>
     </insert>

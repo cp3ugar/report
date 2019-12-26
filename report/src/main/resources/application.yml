@@ -1,8 +1,11 @@
 server:
   port: 8080
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 81003bdf527dcb4e0e7b264c2c793443db695354
 #输出sql语句
 mybatis:
   configuration:
@@ -21,6 +24,9 @@ student:
 
 #配置试图重定向JSP文件的位置
 spring:
+  servlet:
+    multipart:
+      max-file-size: 10Mb
   mvc:
     view:
       prefix: /WEB-INF/views/
