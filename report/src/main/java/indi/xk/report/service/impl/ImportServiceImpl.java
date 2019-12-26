@@ -1,7 +1,9 @@
 package indi.xk.report.service.impl;
 
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import indi.xk.report.mapper.StudentMapper;
+import indi.xk.report.pojo.Ssbgxx;
+import indi.xk.report.pojo.Ssbqxx;
+import indi.xk.report.pojo.Ssxx;
 import indi.xk.report.pojo.dto.StudentDTO;
 import indi.xk.report.service.ImportService;
 import indi.xk.report.utils.Utils;
@@ -33,7 +35,7 @@ public class ImportServiceImpl implements ImportService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void importExcel(InputStream is) throws IOException,InvalidFormatException {
+    public void importExcel(InputStream is) throws IOException{
         List<StudentDTO> students = new ArrayList<>();
         HSSFWorkbook book = new HSSFWorkbook(is);
         HSSFSheet sheet = book.getSheetAt(0);
@@ -68,6 +70,106 @@ public class ImportServiceImpl implements ImportService {
         //批量保存
         if(Utils.isNotEmpty(students)){
             studentMapper.batchInsert(students);
+        }
+    }
+
+    /**
+     * 导入excel
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void importExcelToThreeTable(InputStream is) throws IOException{
+        List<Ssbqxx> ssbqxxs = new ArrayList<>();
+        List<Ssbgxx> ssbgxxs = new ArrayList<>();
+        List<Ssxx> ssxxs = new ArrayList<>();
+        HSSFWorkbook book = new HSSFWorkbook(is);
+        HSSFSheet ssbqxxsSheet = book.getSheetAt(0);
+        HSSFSheet ssbgxxsSheet = book.getSheetAt(1);
+        HSSFSheet ssxxsSheet = book.getSheetAt(2);
+
+        //查封台账
+        for(int i=1; i<ssbqxxsSheet.getLastRowNum()+1; i++) {
+            HSSFRow row = ssbqxxsSheet.getRow(i);
+            row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(2).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(5).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(6).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(7).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(8).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(9).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(10).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(11).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(12).setCellType(Cell.CELL_TYPE_STRING);
+            //名称
+            Integer studentId = Integer.valueOf(row.getCell(0).getStringCellValue());
+            String name = row.getCell(1).getStringCellValue();
+            String sex = row.getCell(2).getStringCellValue();
+            Integer age = Integer.valueOf(row.getCell(3).getStringCellValue());
+            String birthday = row.getCell(4).getStringCellValue();
+            Ssbqxx ssbqxx = new Ssbqxx();
+            ssbqxxs.add(ssbqxx);
+        }
+        for (Ssbqxx ssbqxx : ssbqxxs) {
+            System.err.println(ssbqxx);
+        }
+
+        //被告人信息维护
+        for(int i=1; i<ssbqxxsSheet.getLastRowNum()+1; i++) {
+            HSSFRow row = ssbqxxsSheet.getRow(i);
+            row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(2).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(5).setCellType(Cell.CELL_TYPE_STRING);
+            //名称
+            Integer studentId = Integer.valueOf(row.getCell(0).getStringCellValue());
+            String name = row.getCell(1).getStringCellValue();
+            String sex = row.getCell(2).getStringCellValue();
+            Integer age = Integer.valueOf(row.getCell(3).getStringCellValue());
+            String birthday = row.getCell(4).getStringCellValue();
+            Ssbgxx ssbgxx = new Ssbgxx();
+            ssbgxxs.add(ssbgxx);
+        }
+        for (Ssbgxx ssbgxx : ssbgxxs) {
+            System.err.println(ssbgxx);
+        }
+
+        //诉讼台账
+        for(int i=1; i<ssxxsSheet.getLastRowNum()+1; i++) {
+            HSSFRow row = ssxxsSheet.getRow(i);
+            row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(2).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(5).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(6).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(7).setCellType(Cell.CELL_TYPE_STRING);
+            //名称
+            Integer studentId = Integer.valueOf(row.getCell(0).getStringCellValue());
+            String name = row.getCell(1).getStringCellValue();
+            String sex = row.getCell(2).getStringCellValue();
+            Integer age = Integer.valueOf(row.getCell(3).getStringCellValue());
+            String birthday = row.getCell(4).getStringCellValue();
+            Ssxx ssxx = new Ssxx();
+            ssxxs.add(ssxx);
+        }
+        for (Ssxx ssxx : ssxxs) {
+            System.err.println(ssxx);
+        }
+        //批量保存
+        if(Utils.isNotEmpty(ssbgxxs)){
+            studentMapper.batchInsertSsbgxx(ssbgxxs);
+        }
+        if(Utils.isNotEmpty(ssbqxxs)){
+            studentMapper.batchInsertSsbqxx(ssbqxxs);
+        }
+        if(Utils.isNotEmpty(ssxxs)){
+            studentMapper.batchInsertSsxx(ssxxs);
         }
     }
 }

@@ -10,5 +10,5 @@
 </head>
 <body>
     Hello,现在时间是 ${now}！
-    <a href="/listStudent">查看学生列表</a>
+    <a href="/toListStudent">查看学生列表</a>
 </body>

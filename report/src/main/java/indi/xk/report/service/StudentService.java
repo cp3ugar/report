@@ -2,6 +2,7 @@ package indi.xk.report.service;
 
 import indi.xk.report.pojo.Student;
 import indi.xk.report.pojo.dto.StudentDTO;
+import indi.xk.report.utils.PageView;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface StudentService {
      * list
      * @return
      */
-    List<StudentDTO> findAll();
+    PageView<StudentDTO> findAll(PageView pageView);
 
     /**
      * 添加

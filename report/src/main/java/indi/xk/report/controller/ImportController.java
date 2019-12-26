@@ -28,6 +28,13 @@ public class ImportController {
         InputStream is = file.getInputStream();
         importService.importExcel(is);
         return ReturnObject.outSuccess("导入成功！");
+    }
 
+    @PostMapping("/import")
+    @ResponseBody
+    public ReturnObject importExcelToThreeTable(@RequestParam("file") MultipartFile file) throws IOException {
+        InputStream is = file.getInputStream();
+        importService.importExcelToThreeTable(is);
+        return ReturnObject.outSuccess("导入成功！");
     }
 }
