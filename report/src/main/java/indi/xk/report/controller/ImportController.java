@@ -22,13 +22,13 @@ public class ImportController {
     @Autowired
     private ImportService importService;
 
-    @PostMapping("/import")
-    @ResponseBody
-    public ReturnObject importExcel(@RequestParam("file") MultipartFile file) throws IOException {
-        InputStream is = file.getInputStream();
-        importService.importExcel(is);
-        return ReturnObject.outSuccess("导入成功！");
-    }
+//    @PostMapping("/import")
+//    @ResponseBody
+//    public ReturnObject importExcel(@RequestParam("file") MultipartFile file) throws IOException {
+//        InputStream is = file.getInputStream();
+//        importService.importExcel(is);
+//        return ReturnObject.outSuccess("导入成功！");
+//    }
 
     @PostMapping("/import")
     @ResponseBody

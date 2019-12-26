@@ -4,6 +4,7 @@ package indi.xk.report.mapper;
 import indi.xk.report.pojo.Ssbgxx;
 import indi.xk.report.pojo.Ssbqxx;
 import indi.xk.report.pojo.Ssxx;
+import indi.xk.report.pojo.Sszxxx;
 import indi.xk.report.pojo.dto.StudentDTO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -54,4 +55,6 @@ public interface StudentMapper {
     void batchInsertSsbqxx(List<Ssbqxx> ssbqxxs);
 
     void batchInsertSsxx(List<Ssxx> ssxxs);
+
+    void batchInsertSszxxx(List<Sszxxx> sszxxxs);
 }

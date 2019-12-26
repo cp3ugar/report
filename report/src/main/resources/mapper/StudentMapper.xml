@@ -47,6 +47,7 @@
         insert into t_ssbgxx
         (
             bgid,
+            ssid,
             mc,
             zjhm,
             ybglx,
@@ -57,6 +58,7 @@
         <foreach collection="list" item="item" separator=",">
             (
                 #{item.bgid},
+                #{item.ssid},
                 #{item.mc},
                 #{item.zjhm},
                 #{item.ybglx},
@@ -110,8 +112,12 @@
             jkid,
             dfmc,
             jkrzjh,
+            sljd,
             slfg,
-            bde
+            bde,
+            pjr,
+            pjsah,
+            org_code_ss
         )
         values
         <foreach collection="list" item="item" separator=",">
@@ -120,8 +126,37 @@
                 #{item.jkid},
                 #{item.dfmc},
                 #{item.jkrzjh},
+                #{item.sljd},
                 #{item.slfg},
-                #{item.bde}
+                #{item.bde},
+                #{item.pjr},
+                #{item.pjsah},
+                #{item.orgCodeSs}
+            )
+        </foreach>
+    </insert>
+
+    <insert id="batchInsertSszxxx">
+        insert into t_sszxxx
+        (
+            zxid,
+            ssid,
+            zxah,
+            zxfy,
+            zxfg,
+            ssxmdrq,
+            sfdczxhj
+        )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+                #{item.zxid},
+                #{item.ssid},
+                #{item.zxah},
+                #{item.zxfy},
+                #{item.zxfg},
+                #{item.ssxmdrq},
+                #{item.sfdczxhj}
             )
         </foreach>
     </insert>

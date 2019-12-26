@@ -7,9 +7,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>学生列表</title>
     <meta charset="UTF-8"/>
-    <link rel="stylesheet" href="/layui/css/layui.css">
+<%--    <link rel="stylesheet" href="/layui/css/layui.css">--%>
     <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="/layui/layui.js"></script>
+<%--    <script type="text/javascript" src="/layui/layui.js"></script>--%>
     <script type="text/javascript" src="/js/listStudent.js"></script>
 </head>
 <body>
@@ -73,16 +73,16 @@
         <%--<input id="addStudent" type="button" value="提交" hidden="hidden">
         <input id="cancelAdd" type="button" value="取消" hidden="hidden">--%>
     </div>
-<%--    <div id="showImport">
+    <div id="showImport">
         导入:<input id="stuFile" type="file" multiple="multiple">
-        &lt;%&ndash;    <button id="stuFile" class="layui-btn" type="file" multiple="multiple">导入</button>&ndash;%&gt;
-&lt;%&ndash;        <input id="importStu" type="button" value="导入">&ndash;%&gt;
+        <%--    <button id="stuFile" class="layui-btn" type="file" multiple="multiple">导入</button>--%>
+<%--        <input id="importStu" type="button" value="导入">--%>
         <button id="importStu" type="button" class="layui-btn layui-btn-primary">导入</button>
-    </div>--%>
-<div class="layui-upload" id="showImport">
+    </div>
+<%--<div class="layui-upload" id="showImport">
     <button id="stuFile" type="button" class="layui-btn layui-btn-normal">选择文件</button>
     <button type="button" class="layui-btn" id="importStu">开始上传</button>
-</div>
+</div>--%>
 </body>
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
