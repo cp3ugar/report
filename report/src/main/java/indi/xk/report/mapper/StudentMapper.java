@@ -1,10 +1,7 @@
 package indi.xk.report.mapper;
 
 
-import indi.xk.report.pojo.Ssbgxx;
-import indi.xk.report.pojo.Ssbqxx;
-import indi.xk.report.pojo.Ssxx;
-import indi.xk.report.pojo.Sszxxx;
+import indi.xk.report.pojo.*;
 import indi.xk.report.pojo.dto.StudentDTO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -49,12 +46,4 @@ public interface StudentMapper {
     @Insert("insert into student (student_id,`name`,sex,age,birthday) " +
             "values (#{studentId},#{name},#{sex},#{age},#{birthday})")
     int addStudent(StudentDTO student);
-
-    void batchInsertSsbgxx(List<Ssbgxx> ssbgxxs);
-
-    void batchInsertSsbqxx(List<Ssbqxx> ssbqxxs);
-
-    void batchInsertSsxx(List<Ssxx> ssxxs);
-
-    void batchInsertSszxxx(List<Sszxxx> sszxxxs);
 }

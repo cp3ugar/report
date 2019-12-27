@@ -64,4 +64,18 @@ public class Utils {
         }
         return false;
     }
+
+    /**
+     * date转string
+     * @param date
+     * @return
+     */
+    public static String getStringDate(Date date) {
+        if(Utils.isEmpty(date)){
+            return "";
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = formatter.format(date);
+        return dateString;
+    }
 }
