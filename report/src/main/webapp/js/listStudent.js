@@ -73,12 +73,10 @@ window.onload = function () {
                             "birthday": birthday
                         },
                         success: function (data) {
-                            // $("#studentId").val('');
-                            // $("#name").val('');
-                            // $("#sex").val('');
-                            // $("#age").val('');
-                            // $("#birthday").val('');
                             layer.msg(data.msg);
+                            if("添加成功！"== data.msg){
+                                layer.close(index);
+                            }
                         }
                     })
                 },
@@ -90,7 +88,6 @@ window.onload = function () {
             //日期
             laydate.render({
                 elem: '#birthday'
-                // ,value: new Date()
             });
         });
 
