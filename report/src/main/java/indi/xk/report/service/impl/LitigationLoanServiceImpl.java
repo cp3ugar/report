@@ -32,7 +32,6 @@ public class LitigationLoanServiceImpl implements LitigationLoanService {
 
     @Override
     public LitigationLoan listselect() {
-
         return null;
     }
 

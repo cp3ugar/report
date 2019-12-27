@@ -4,10 +4,9 @@ package indi.xk.report.mapper;
 import indi.xk.report.pojo.Ssbgxx;
 import indi.xk.report.pojo.Ssbqxx;
 import indi.xk.report.pojo.Ssxx;
-<<<<<<< HEAD
-=======
+
 import indi.xk.report.pojo.Sszxxx;
->>>>>>> 81003bdf527dcb4e0e7b264c2c793443db695354
+
 import indi.xk.report.pojo.dto.StudentDTO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -52,11 +51,11 @@ public interface StudentMapper {
     @Insert("insert into student (student_id,`name`,sex,age,birthday) " +
             "values (#{studentId},#{name},#{sex},#{age},#{birthday})")
     int addStudent(StudentDTO student);
-<<<<<<< HEAD
+
     void batchInsert1(@Param("list") List<Ssbqxx> Ssbqxx);
     void batchInsert2(@Param("list") List<Ssbgxx> Ssbgxx);
     void batchInsert3(@Param("list") List<Ssxx> Ssxx);
-=======
+
 
     void batchInsertSsbgxx(List<Ssbgxx> ssbgxxs);
 
@@ -65,5 +64,5 @@ public interface StudentMapper {
     void batchInsertSsxx(List<Ssxx> ssxxs);
 
     void batchInsertSszxxx(List<Sszxxx> sszxxxs);
->>>>>>> 81003bdf527dcb4e0e7b264c2c793443db695354
+
 }
