@@ -7,9 +7,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>学生列表</title>
     <meta charset="UTF-8"/>
-<%--    <link rel="stylesheet" href="/layui/css/layui.css">--%>
+    <link rel="stylesheet" href="/layui/css/layui.css">
     <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
-<%--    <script type="text/javascript" src="/layui/layui.js"></script>--%>
+    <script type="text/javascript" src="/layui/layui.js"></script>
     <script type="text/javascript" src="/js/listStudent.js"></script>
 </head>
 <body>
@@ -67,51 +67,30 @@
 </div>
     <div>
         <%--<input id="showAdd" type="button" value="添加学生">--%>
-        <button id="showAdd" type="button" class="layui-btn layui-btn-primary">添加学生</button>
+
         <button id="addStudent" type="button" class="layui-btn layui-btn-primary" hidden="hidden">提交</button>
         <button id="cancelAdd" type="button" class="layui-btn layui-btn-primary" hidden="hidden">取消</button>
         <%--<input id="addStudent" type="button" value="提交" hidden="hidden">
         <input id="cancelAdd" type="button" value="取消" hidden="hidden">--%>
     </div>
-    <div id="showImport">
-        导入:<input id="stuFile" type="file" multiple="multiple">
-        <%--    <button id="stuFile" class="layui-btn" type="file" multiple="multiple">导入</button>--%>
-<%--        <input id="importStu" type="button" value="导入">--%>
-        <button id="importStu" type="button" class="layui-btn layui-btn-primary">导入</button>
-    </div>
-<%--<div class="layui-upload" id="showImport">
+<%--    <div id="showImport">--%>
+<%--        导入:<input id="stuFile" type="file" multiple="multiple">--%>
+<%--        &lt;%&ndash;    <button id="stuFile" class="layui-btn" type="file" multiple="multiple">导入</button>&ndash;%&gt;--%>
+<%--&lt;%&ndash;        <input id="importStu" type="button" value="导入">&ndash;%&gt;--%>
+<%--        <button id="importStu" type="button" class="layui-btn layui-btn-primary">导入</button>--%>
+<%--    </div>--%>
+<div class="layui-upload" id="showImport">
     <button id="stuFile" type="button" class="layui-btn layui-btn-normal">选择文件</button>
-    <button type="button" class="layui-btn" id="importStu">开始上传</button>
-</div>--%>
+    <button id="importStu" type="button" class="layui-btn">开始上传</button>
+</div>
 </body>
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
         <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
         <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+        <button id="showAdd" type="button" class="layui-btn layui-btn-sm">添加学生</button>
     </div>
-</script>
-
-<<<<<<< HEAD
-            var formData = new FormData();
-            formData.append("file",$('#stuFile')[0].files[0]);
-            $.ajax({
-                url : '/import1',
-                type : 'post',
-                dataType:'json',
-                data:formData,
-                processData : false, // 使数据不做处理
-                contentType : false, // 不要设置Content-Type请求头
-                success : function(data) {
-                    alert(data.message);
-                    location.reload();
-                }
-            })
-        }
-    }
-</script>
-=======
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
->>>>>>> 81003bdf527dcb4e0e7b264c2c793443db695354
