@@ -41,7 +41,7 @@ public class ImportServiceImpl implements ImportService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void importExcel(InputStream is) throws IOException{
+    public void importExcel(InputStream is) throws IOException {
         List<StudentDTO> students = new ArrayList<>();
         HSSFWorkbook book = new HSSFWorkbook(is);
         HSSFSheet sheet = book.getSheetAt(0);
@@ -49,7 +49,7 @@ public class ImportServiceImpl implements ImportService {
         /**
          * 通常第一行都是标题，所以从第二行开始读取数据
          */
-        for(int i=1; i<sheet.getLastRowNum()+1; i++) {
+        for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
             HSSFRow row = sheet.getRow(i);
             row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
             row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);
@@ -74,17 +74,18 @@ public class ImportServiceImpl implements ImportService {
             System.err.println(student);
         }
         //批量保存
-        if(Utils.isNotEmpty(students)){
+        if (Utils.isNotEmpty(students)) {
             studentMapper.batchInsert(students);
         }
     }
+
 
     /**
      * 导入excel
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void importExcelToThreeTable(InputStream is) throws IOException{
+    public void importExcelToThreeTable(InputStream is) throws IOException {
         List<Ssbqxx> ssbqxxs = new ArrayList<>();
         List<Ssbgxx> ssbgxxs = new ArrayList<>();
         List<Ssxx> ssxxs = new ArrayList<>();
@@ -96,7 +97,7 @@ public class ImportServiceImpl implements ImportService {
         HSSFSheet ssxxsSheet = book.getSheetAt(3);
 
         //查封台账
-        for(int i=1; i<ssbqxxsSheet.getLastRowNum()+1; i++) {
+        for (int i = 1; i < ssbqxxsSheet.getLastRowNum() + 1; i++) {
             HSSFRow row = ssbqxxsSheet.getRow(i);
             row.getCell(7).setCellType(Cell.CELL_TYPE_STRING);
             //名称
@@ -107,8 +108,8 @@ public class ImportServiceImpl implements ImportService {
             String bqfs = row.getCell(3).getStringCellValue();
             String sflhcf = row.getCell(4).getStringCellValue();
             String cqzt = row.getCell(5).getStringCellValue();
-            if(row.getCell(6).getCellType() != Cell.CELL_TYPE_BLANK && row.getCell(6).getCellType() != Cell.CELL_TYPE_NUMERIC){
-                throw new BaseRuntimeException(500,"日期格式不正确！");
+            if (row.getCell(6).getCellType() != Cell.CELL_TYPE_BLANK && row.getCell(6).getCellType() != Cell.CELL_TYPE_NUMERIC) {
+                throw new BaseRuntimeException(500, "日期格式不正确！");
             }
             Date bqqsrDate = row.getCell(6).getDateCellValue();
             String bqqsr = Utils.getStringDate(bqqsrDate);
@@ -122,7 +123,7 @@ public class ImportServiceImpl implements ImportService {
             bqfs = convertBqfs(bqfs);
             cqzt = convertCqzt(cqzt);
             czzt = convertCzzt(czzt);
-            sflhcf =  convertSflhcf(sflhcf);
+            sflhcf = convertSflhcf(sflhcf);
             Ssbqxx ssbqxx = new Ssbqxx();
             ssbqxx.setBqid(bqid);
             ssbqxx.setSsid(ssid);
@@ -141,7 +142,7 @@ public class ImportServiceImpl implements ImportService {
         }
 
         //被告人信息维护
-        for(int i=1; i<ssbgxxsSheet.getLastRowNum()+1; i++) {
+        for (int i = 1; i < ssbgxxsSheet.getLastRowNum() + 1; i++) {
             HSSFRow row = ssbgxxsSheet.getRow(i);
             row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
             //名称
@@ -165,7 +166,7 @@ public class ImportServiceImpl implements ImportService {
         }
 
         //诉讼台账
-        for(int i=1; i<ssxxsSheet.getLastRowNum()+1; i++) {
+        for (int i = 1; i < ssxxsSheet.getLastRowNum() + 1; i++) {
             HSSFRow row = ssxxsSheet.getRow(i);
             row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
             row.getCell(10).setCellType(Cell.CELL_TYPE_STRING);
@@ -177,13 +178,13 @@ public class ImportServiceImpl implements ImportService {
             String jkid = row.getCell(0).getStringCellValue();
             String dfmc = row.getCell(2).getStringCellValue();
             String jkrzjh = row.getCell(3).getStringCellValue();
-            if(row.getCell(4).getCellType() != Cell.CELL_TYPE_BLANK && row.getCell(4).getCellType() != Cell.CELL_TYPE_NUMERIC){
-                throw new BaseRuntimeException(500,"日期格式不正确！");
+            if (row.getCell(4).getCellType() != Cell.CELL_TYPE_BLANK && row.getCell(4).getCellType() != Cell.CELL_TYPE_NUMERIC) {
+                throw new BaseRuntimeException(500, "日期格式不正确！");
             }
             Date larqDate = row.getCell(4).getDateCellValue();
             String larq = Utils.getStringDate(larqDate);
-            if(row.getCell(6).getCellType() != Cell.CELL_TYPE_BLANK && row.getCell(6).getCellType() != Cell.CELL_TYPE_NUMERIC){
-                throw new BaseRuntimeException(500,"日期格式不正确！");
+            if (row.getCell(6).getCellType() != Cell.CELL_TYPE_BLANK && row.getCell(6).getCellType() != Cell.CELL_TYPE_NUMERIC) {
+                throw new BaseRuntimeException(500, "日期格式不正确！");
             }
             Date fqrqDate = row.getCell(6).getDateCellValue();
             String fqrq = Utils.getStringDate(fqrqDate);
@@ -192,26 +193,29 @@ public class ImportServiceImpl implements ImportService {
             String slfg = row.getCell(9).getStringCellValue();
             String bdeStr = row.getCell(10).getStringCellValue();
             BigDecimal bde = null;
-            if(Utils.isNotEmpty(bdeStr)){
+            if (Utils.isNotEmpty(bdeStr)) {
                 bde = new BigDecimal(bdeStr);
             }
             String sljg = row.getCell(11).getStringCellValue();
-            if(row.getCell(12).getCellType() != Cell.CELL_TYPE_BLANK && row.getCell(12).getCellType() != Cell.CELL_TYPE_NUMERIC){
-                throw new BaseRuntimeException(500,"日期格式不正确！");
+            if (row.getCell(12).getCellType() != Cell.CELL_TYPE_BLANK && row.getCell(12).getCellType() != Cell.CELL_TYPE_NUMERIC) {
+                throw new BaseRuntimeException(500, "日期格式不正确！");
+            }
+            if (Utils.isNotEmpty(row.getCell(10).getStringCellValue())) {
+                bde = new BigDecimal(row.getCell(10).getStringCellValue());
             }
             Date pjrDate = row.getCell(12).getDateCellValue();
             String pjr = Utils.getStringDate(pjrDate);
             String pjsah = row.getCell(13).getStringCellValue();
-            if(row.getCell(14).getCellType() != Cell.CELL_TYPE_BLANK && row.getCell(14).getCellType() != Cell.CELL_TYPE_NUMERIC){
-                throw new BaseRuntimeException(500,"日期格式不正确！");
+            if (row.getCell(14).getCellType() != Cell.CELL_TYPE_BLANK && row.getCell(14).getCellType() != Cell.CELL_TYPE_NUMERIC) {
+                throw new BaseRuntimeException(500, "日期格式不正确！");
             }
             Date flwssxrDate = row.getCell(14).getDateCellValue();
             String flwssxr = Utils.getStringDate(flwssxrDate);
             String zxah = row.getCell(16).getStringCellValue();
             String zxfy = row.getCell(17).getStringCellValue();
             String zxfg = row.getCell(18).getStringCellValue();
-            if(row.getCell(19).getCellType() != Cell.CELL_TYPE_BLANK && row.getCell(19).getCellType() != Cell.CELL_TYPE_NUMERIC){
-                throw new BaseRuntimeException(500,"日期格式不正确！");
+            if (row.getCell(19).getCellType() != Cell.CELL_TYPE_BLANK && row.getCell(19).getCellType() != Cell.CELL_TYPE_NUMERIC) {
+                throw new BaseRuntimeException(500, "日期格式不正确！");
             }
             Date ssxmdrqDate = row.getCell(19).getDateCellValue();
             String ssxmdrq = Utils.getStringDate(ssxmdrqDate);
@@ -257,25 +261,26 @@ public class ImportServiceImpl implements ImportService {
         }
 
         //批量保存
-        if(Utils.isNotEmpty(ssbgxxs)){
+        if (Utils.isNotEmpty(ssbgxxs)) {
             importMapper.batchInsertSsbgxx(ssbgxxs);
         }
-        if(Utils.isNotEmpty(ssbqxxs)){
+        if (Utils.isNotEmpty(ssbqxxs)) {
             importMapper.batchInsertSsbqxx(ssbqxxs);
         }
-        if(Utils.isNotEmpty(ssxxs)){
+        if (Utils.isNotEmpty(ssxxs)) {
             importMapper.batchInsertSsxx(ssxxs);
         }
-        if(Utils.isNotEmpty(sszxxxs)){
+        if (Utils.isNotEmpty(sszxxxs)) {
             importMapper.batchInsertSszxxx(sszxxxs);
         }
-        if(Utils.isNotEmpty(sslaxxs)){
+        if (Utils.isNotEmpty(sslaxxs)) {
             importMapper.batchInsertSslaxxs(sslaxxs);
         }
     }
 
     /**
      * 诉讼管理机构转换
+     *
      * @param
      * @return
      * @author xk
@@ -283,9 +288,9 @@ public class ImportServiceImpl implements ImportService {
      */
     private String orgCodeSsConvert(String value) {
         //查询所有诉讼管理机构
-        List<Org> orgs =  importMapper.queryAllOrgs();
-        for(Org org : orgs){
-            if(org.getOrgName().equals(value)){
+        List<Org> orgs = importMapper.queryAllOrgs();
+        for (Org org : orgs) {
+            if (org.getOrgName().equals(value)) {
                 return org.getOrgId();
             }
         }
@@ -294,16 +299,17 @@ public class ImportServiceImpl implements ImportService {
 
     /**
      * 被告人类型转换
+     *
      * @param
      * @return
      * @author xk
      * @date 2019/12/27  10:50
      */
     private String ybglxConvert(String value) {
-        String[] sflhcfArr = {"错误类型","借款人","担保人","其他","共同借款人"};
-        for(int i=0;i<sflhcfArr.length;i++){
-            if(sflhcfArr[i].equals(value)){
-                return ""+i+"";
+        String[] sflhcfArr = {"错误类型", "借款人", "担保人", "其他", "共同借款人"};
+        for (int i = 0; i < sflhcfArr.length; i++) {
+            if (sflhcfArr[i].equals(value)) {
+                return "" + i + "";
             }
         }
         return null;
@@ -317,10 +323,10 @@ public class ImportServiceImpl implements ImportService {
      * @date 2019/12/27  10:50
      */
     private String convertSfdczxhj(String value) {
-        String[] sflhcfArr = {"错误状态","是","否"};
-        for(int i=0;i<sflhcfArr.length;i++){
-            if(sflhcfArr[i].equals(value)){
-                return ""+i+"";
+        String[] sflhcfArr = {"错误状态", "是", "否"};
+        for (int i = 0; i < sflhcfArr.length; i++) {
+            if (sflhcfArr[i].equals(value)) {
+                return "" + i + "";
             }
         }
         return null;
@@ -328,16 +334,17 @@ public class ImportServiceImpl implements ImportService {
 
     /**
      * 查封阶段转换
+     *
      * @param
      * @return
      * @author xk
      * @date 2019/12/27  10:50
      */
     private String convertBqjd(String value) {
-        String[] bqlxArr = {"错误阶段","诉前","诉中","执行"};
-        for(int i=0;i<bqlxArr.length;i++){
-            if(bqlxArr[i].equals(value)){
-                return ""+i+"";
+        String[] bqlxArr = {"错误阶段", "诉前", "诉中", "执行"};
+        for (int i = 0; i < bqlxArr.length; i++) {
+            if (bqlxArr[i].equals(value)) {
+                return "" + i + "";
             }
         }
         return null;
@@ -345,16 +352,17 @@ public class ImportServiceImpl implements ImportService {
 
     /**
      * 查封资产类型转换
+     *
      * @param
      * @return
      * @author xk
      * @date 2019/12/27  10:50
      */
-    private String convertBqlx(String value){
-        String[] bqlxArr = {"错误类型","土地","房产","交通工具","设备","有价证券","银行存款","银行存款","其他"};
-        for(int i=0;i<bqlxArr.length;i++){
-            if(bqlxArr[i].equals(value)){
-                return ""+i+"";
+    private String convertBqlx(String value) {
+        String[] bqlxArr = {"错误类型", "土地", "房产", "交通工具", "设备", "有价证券", "银行存款", "银行存款", "其他"};
+        for (int i = 0; i < bqlxArr.length; i++) {
+            if (bqlxArr[i].equals(value)) {
+                return "" + i + "";
             }
         }
         return null;
@@ -362,16 +370,17 @@ public class ImportServiceImpl implements ImportService {
 
     /**
      * 查封方式转换
+     *
      * @param
      * @return
      * @author xk
      * @date 2019/12/27  10:50
      */
-    private String convertBqfs(String value){
-        String[] bqfsArr = {"错误方式","查封","冻结","扣押","其他"};
-        for(int i=0;i<bqfsArr.length;i++){
-            if(bqfsArr[i].equals(value)){
-                return ""+i+"";
+    private String convertBqfs(String value) {
+        String[] bqfsArr = {"错误方式", "查封", "冻结", "扣押", "其他"};
+        for (int i = 0; i < bqfsArr.length; i++) {
+            if (bqfsArr[i].equals(value)) {
+                return "" + i + "";
             }
         }
         return null;
@@ -379,16 +388,17 @@ public class ImportServiceImpl implements ImportService {
 
     /**
      * 是否轮候查封转换
+     *
      * @param
      * @return
      * @author xk
      * @date 2019/12/27  10:50
      */
-    private String convertSflhcf(String value){
-        String[] sflhcfArr = {"错误状态","是","否"};
-        for(int i=0;i<sflhcfArr.length;i++){
-            if(sflhcfArr[i].equals(value)){
-                return ""+i+"";
+    private String convertSflhcf(String value) {
+        String[] sflhcfArr = {"错误状态", "是", "否"};
+        for (int i = 0; i < sflhcfArr.length; i++) {
+            if (sflhcfArr[i].equals(value)) {
+                return "" + i + "";
             }
         }
         return null;
@@ -396,16 +406,17 @@ public class ImportServiceImpl implements ImportService {
 
     /**
      * 查封状态转换
+     *
      * @param
      * @return
      * @author xk
      * @date 2019/12/27  10:51
      */
-    private String convertCqzt(String value){
-        String[] cqztArr = {"错误状态","一封","二封","三封","四封","四封以上"};
-        for(int i=0;i<cqztArr.length;i++){
-            if(cqztArr[i].equals(value)){
-                return ""+i+"";
+    private String convertCqzt(String value) {
+        String[] cqztArr = {"错误状态", "一封", "二封", "三封", "四封", "四封以上"};
+        for (int i = 0; i < cqztArr.length; i++) {
+            if (cqztArr[i].equals(value)) {
+                return "" + i + "";
             }
         }
         return null;
@@ -413,16 +424,17 @@ public class ImportServiceImpl implements ImportService {
 
     /**
      * 处置状态转换
+     *
      * @param
      * @return
      * @author xk
      * @date 2019/12/27  10:51
      */
-    private String convertCzzt(String value){
-        String[] czztArr = {"错误状态","未处置","处置中","处置完毕","解封"};
-        for(int i=0;i<czztArr.length;i++){
-            if(czztArr[i].equals(value)){
-                return ""+i+"";
+    private String convertCzzt(String value) {
+        String[] czztArr = {"错误状态", "未处置", "处置中", "处置完毕", "解封"};
+        for (int i = 0; i < czztArr.length; i++) {
+            if (czztArr[i].equals(value)) {
+                return "" + i + "";
             }
         }
         return null;

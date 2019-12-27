@@ -56,4 +56,25 @@ public class StudentController{
         studentService.addStudent(student);
         return ReturnObject.outSuccess("添加成功！");
     }
+    @GetMapping ("/add")
+    @ResponseBody
+    public void add(){
+
+        studentService.add();
+
+    }
+    @GetMapping ("/addbg")
+    @ResponseBody
+    public void addbg(){
+
+        studentService.addbg();
+
+    }
+    @GetMapping ("/addtz")
+    @ResponseBody
+    public void addtz(){
+
+        studentService.addtz();
+
+    }
 }

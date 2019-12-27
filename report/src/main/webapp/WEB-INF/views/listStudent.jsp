@@ -93,6 +93,26 @@
     </div>
 </script>
 
+<<<<<<< HEAD
+            var formData = new FormData();
+            formData.append("file",$('#stuFile')[0].files[0]);
+            $.ajax({
+                url : '/import1',
+                type : 'post',
+                dataType:'json',
+                data:formData,
+                processData : false, // 使数据不做处理
+                contentType : false, // 不要设置Content-Type请求头
+                success : function(data) {
+                    alert(data.message);
+                    location.reload();
+                }
+            })
+        }
+    }
+</script>
+=======
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
+>>>>>>> 81003bdf527dcb4e0e7b264c2c793443db695354
