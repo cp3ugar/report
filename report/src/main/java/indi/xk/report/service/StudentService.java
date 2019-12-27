@@ -25,7 +25,4 @@ public interface StudentService {
      * @param student
      */
     void addStudent(StudentDTO student);
-    void add();
-    void addbg();
-    void addtz();
 }
