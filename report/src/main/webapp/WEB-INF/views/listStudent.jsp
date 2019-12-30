@@ -13,7 +13,6 @@
     <script type="text/javascript" src="/js/listStudent.js"></script>
 </head>
 <body>
-<%-- 列表 --%>
 <div>
     <table id="stuList" lay-filter="test"></table>
 </div>
@@ -25,7 +24,7 @@
         <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
         <button id="addStu" type="button" class="layui-btn layui-btn-sm">添加学生</button>
         <button id="importStu" type="button" class="layui-btn layui-btn-sm">导入学生</button>
-<%--        <button id="exportStu" type="button" class="layui-btn layui-btn-sm">导出学生</button>--%>
+        <a href="/export" id="exportStu" type="button" class="layui-btn layui-btn-sm">导出学生</a>
     </div>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
