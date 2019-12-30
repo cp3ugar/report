@@ -26,6 +26,7 @@
         <button id="importStu" type="button" class="layui-btn layui-btn-sm">导入学生</button>
         <a href="/export" id="exportStu" type="button" class="layui-btn layui-btn-sm">导出学生</a>
     </div>
+</script>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>

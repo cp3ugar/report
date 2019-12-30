@@ -122,26 +122,6 @@ window.onload = function () {
             ]]
         });
 
-        // //导出学生
-        // var exportStu = document.getElementById("exportStu");
-        // exportStu.onclick = function () {
-        //     // window.open("localhost:8080/export");
-        //
-        //     var $eleForm = $("<form method='get'></form>");
-        //     $eleForm.attr("action","localhost:8080/export");
-        //     $(document.body).append($eleForm);
-        //     //提交表单，实现下载
-        //     $eleForm.submit();
-        //
-        //     // $.ajax({
-        //     //     url: '/export',
-        //     //     type: 'get',
-        //     //     success: function (data) {
-        //     //
-        //     //     }
-        //     // })
-        // }
-
         //导入学生
         upload.render({
             elem: '#importStu'
