@@ -70,11 +70,11 @@ public class Utils {
      * @param date
      * @return
      */
-    public static String getStringDate(Date date) {
+    public static String getStringDate(Date date,String pattern) {
         if(Utils.isEmpty(date)){
             return "";
         }
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat formatter = new SimpleDateFormat(pattern);
         String dateString = formatter.format(date);
         return dateString;
     }

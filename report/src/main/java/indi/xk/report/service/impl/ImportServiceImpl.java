@@ -108,7 +108,7 @@ public class ImportServiceImpl implements ImportService {
                 throw new BaseRuntimeException(500, "日期格式不正确！");
             }
             Date bqqsrDate = row.getCell(6).getDateCellValue();
-            String bqqsr = Utils.getStringDate(bqqsrDate);
+            String bqqsr = Utils.getStringDate(bqqsrDate,"yyyy/MM/dd");
             String bqccjz = row.getCell(7).getStringCellValue();
             String czzt = row.getCell(8).getStringCellValue();
             String sfxf = row.getCell(9).getStringCellValue();
@@ -178,12 +178,12 @@ public class ImportServiceImpl implements ImportService {
                 throw new BaseRuntimeException(500, "日期格式不正确！");
             }
             Date larqDate = row.getCell(4).getDateCellValue();
-            String larq = Utils.getStringDate(larqDate);
+            String larq = Utils.getStringDate(larqDate,"yyyy/MM/dd");
             if (row.getCell(6).getCellType() != Cell.CELL_TYPE_BLANK && row.getCell(6).getCellType() != Cell.CELL_TYPE_NUMERIC) {
                 throw new BaseRuntimeException(500, "日期格式不正确！");
             }
             Date fqrqDate = row.getCell(6).getDateCellValue();
-            String fqrq = Utils.getStringDate(fqrqDate);
+            String fqrq = Utils.getStringDate(fqrqDate,"yyyy/MM/dd");
             String sljd = row.getCell(7).getStringCellValue();
             String ssft = row.getCell(8).getStringCellValue();
             String slfg = row.getCell(9).getStringCellValue();
@@ -200,13 +200,13 @@ public class ImportServiceImpl implements ImportService {
                 bde = new BigDecimal(row.getCell(10).getStringCellValue());
             }
             Date pjrDate = row.getCell(12).getDateCellValue();
-            String pjr = Utils.getStringDate(pjrDate);
+            String pjr = Utils.getStringDate(pjrDate,"yyyy/MM/dd");
             String pjsah = row.getCell(13).getStringCellValue();
             if (row.getCell(14).getCellType() != Cell.CELL_TYPE_BLANK && row.getCell(14).getCellType() != Cell.CELL_TYPE_NUMERIC) {
                 throw new BaseRuntimeException(500, "日期格式不正确！");
             }
             Date flwssxrDate = row.getCell(14).getDateCellValue();
-            String flwssxr = Utils.getStringDate(flwssxrDate);
+            String flwssxr = Utils.getStringDate(flwssxrDate,"yyyy/MM/dd");
             String zxah = row.getCell(16).getStringCellValue();
             String zxfy = row.getCell(17).getStringCellValue();
             String zxfg = row.getCell(18).getStringCellValue();
@@ -214,7 +214,7 @@ public class ImportServiceImpl implements ImportService {
                 throw new BaseRuntimeException(500, "日期格式不正确！");
             }
             Date ssxmdrqDate = row.getCell(19).getDateCellValue();
-            String ssxmdrq = Utils.getStringDate(ssxmdrqDate);
+            String ssxmdrq = Utils.getStringDate(ssxmdrqDate,"yyyy/MM/dd");
             String sfdczxhj = row.getCell(20).getStringCellValue();
             sfdczxhj = convertSfdczxhj(sfdczxhj);
             String orgCodeSs = row.getCell(21).getStringCellValue();
