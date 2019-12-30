@@ -1,5 +1,5 @@
 window.onload = function () {
-    layui.use(['form', 'layedit', 'laydate','upload','table','layer'], function () {
+    layui.use(['form', 'layedit', 'laydate', 'upload', 'table', 'layer'], function () {
         var form = layui.form
             , layer = layui.layer
             , laydate = layui.laydate
@@ -56,7 +56,7 @@ window.onload = function () {
                     '        </div>\n' +
                     '    </div>\n' +
                     '</div></form>',
-                yes: function(index, layero){
+                yes: function (index, layero) {
                     var studentId = $("#studentId").val();
                     var name = $("#name").val();
                     var sex = $('#sex input[name="sex"]:checked ').val();
@@ -73,15 +73,19 @@ window.onload = function () {
                             "birthday": birthday
                         },
                         success: function (data) {
-                            layer.msg(data.msg);
-                            if("添加成功！"== data.msg){
+                            console.log(data);
+                            if (data.code == 0) {
+                                layer.msg(data.msg);
                                 layer.close(index);
+                                setTimeout('window.location.reload()',100);
+                            }else{
+                                layer.msg(data.msg);
                             }
                         }
                     })
                 },
-                btn2: function(index, layero){
-                    layer.close(index); //如果设定了yes回调，需进行手工关闭
+                btn2: function (index, layero) {
+                    layer.close(index);
                 },
             });
             form.render();
@@ -94,12 +98,12 @@ window.onload = function () {
         //学生列表
         table.render({
             elem: '#stuList'
-            , cellMinWidth: 80 //全局定义常规单元格的最小宽度
-            , url: '/listStudent' //数据接口
+            , cellMinWidth: 80
+            , url: '/listStudent'
             , method: 'get'
-            ,page: {
-                layout: ['prev', 'page', 'next','count','limit', 'skip'] //自定义分页布局
-                ,groups: 3
+            , page: {
+                layout: ['prev', 'page', 'next', 'count', 'limit', 'skip']
+                , groups: 3
             }
             , skin: 'line' //行边框风格
             , even: true //开启隔行背景
@@ -118,26 +122,38 @@ window.onload = function () {
             ]]
         });
 
-        //导出学生
-        var exportStu = document.getElementById("exportStu");
-        exportStu.onclick = function () {
-            $.ajax({
-                url: '/export',
-                type: 'get',
-                success: function (data) {
-
-                }
-            })
-        }
+        // //导出学生
+        // var exportStu = document.getElementById("exportStu");
+        // exportStu.onclick = function () {
+        //     // window.open("localhost:8080/export");
+        //
+        //     var $eleForm = $("<form method='get'></form>");
+        //     $eleForm.attr("action","localhost:8080/export");
+        //     $(document.body).append($eleForm);
+        //     //提交表单，实现下载
+        //     $eleForm.submit();
+        //
+        //     // $.ajax({
+        //     //     url: '/export',
+        //     //     type: 'get',
+        //     //     success: function (data) {
+        //     //
+        //     //     }
+        //     // })
+        // }
 
         //导入学生
         upload.render({
             elem: '#importStu'
-            ,url: '/import'
-            ,accept: 'file' //普通文件
-            ,done: function(res){
-                console.log(res);
-                layer.msg(res.msg);
+            , url: '/import'
+            , accept: 'file'
+            , done: function (data) {
+                if (data.code == 0) {
+                    layer.msg(data.msg);
+                    setTimeout('window.location.reload()',100);
+                }else{
+                    layer.msg(data.msg);
+                }
             }
         });
 
@@ -168,13 +184,26 @@ window.onload = function () {
         //监听行工具事件
         table.on('tool(test)', function (obj) {
             var data = obj.data;
-            //console.log(obj)
-            if (obj.event === 'del') {
-                layer.confirm('真的删除行么', function (index) {
-                    obj.del();
-                    layer.close(index);
-                });
-            }
+            console.log(data);
+            layer.confirm('真的删除行么', function (index) {
+                $.ajax({
+                    url: '/deleteStudent',
+                    type: 'get',
+                    data:{
+                      id:data.id
+                    },
+                    success: function (data) {
+                        if(data.code == 0){
+                            layer.msg(data.msg);
+                            obj.del();
+                            layer.close(index);
+                            setTimeout('window.location.reload()',100);
+                        }else{
+                            layer.msg(data.msg);
+                        }
+                    }
+                })
+            });
         });
     });
 }
