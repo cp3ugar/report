@@ -8,4 +8,6 @@ import indi.xk.report.pojo.Student;
  * @Version 1.0
  */
 public class StudentDTO extends Student {
+
+
 }

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @Version 1.0
  */
 @Controller
-public class StudentController{
+public class StudentController extends BaseController{
     @Autowired
     private StudentService studentService;
 
@@ -31,7 +31,8 @@ public class StudentController{
 
     @GetMapping("/listStudent")
     @ResponseBody
-    public ReturnObject listStudent(@RequestParam("page")Integer pageNow,@RequestParam("limit")Integer pageSize){
+    public ReturnObject listStudent(@RequestParam(value = "page",defaultValue = "1")Integer pageNow,
+                                    @RequestParam(value = "limit",defaultValue = "10")Integer pageSize){
         PageView pageView = new PageView(pageSize,pageNow);
         PageView<StudentDTO> students = studentService.findAll(pageView);
         return new ReturnObject(0,"",students.getRowCount(),students.getRecords());
@@ -39,13 +40,18 @@ public class StudentController{
 
     @PostMapping("/addStudent")
     @ResponseBody
-    public ReturnObject addStudent(@Validated StudentDTO student, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-            for(ObjectError error : bindingResult.getAllErrors()){
-                return ReturnObject.outError(error.getDefaultMessage());
-            }
-        }
+    public ReturnObject addStudent(@Validated StudentDTO student){
         studentService.addStudent(student);
         return ReturnObject.outSuccess("添加成功！");
+    }
+
+    @GetMapping("/deleteStudent")
+    @ResponseBody
+    public ReturnObject deleteStudent(Integer id){
+        if(id == null){
+            return ReturnObject.outError("缺少学生id！");
+        }
+        studentService.deleteStudent(id);
+        return ReturnObject.outSuccess("删除成功！");
     }
 }

@@ -7,10 +7,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>学生列表</title>
     <meta charset="UTF-8"/>
-    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
-    <link rel="stylesheet" href="/layui/css/layui.css">
-    <script type="text/javascript" src="/layui/layui.js"></script>
-    <script type="text/javascript" src="/js/listStudent.js"></script>
+    <script type="text/javascript" src="../../js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="../../layui/css/layui.css">
+    <script type="text/javascript" src="../../layui/layui.js"></script>
+    <script type="text/javascript" src="../../js/listStudent.js"></script>
 </head>
 <body>
 <div>

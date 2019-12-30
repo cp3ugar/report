@@ -61,9 +61,29 @@ public class StudentServiceImpl implements StudentService {
      */
     @Override
     public void addStudent(StudentDTO student) {
+        //查询学号是否重复
+        int res = studentMapper.queryStudentByStudentId(student.getStudentId());
+        if(res > 0){
+            throw new BaseRuntimeException(500,"学号重复！");
+        }
         int row = studentMapper.addStudent(student);
         if(row != 1){
             throw new BaseRuntimeException(500,"添加失败！");
+        }
+    }
+
+    /**
+     * 删除
+     * @param
+     * @return
+     * @author xk
+     * @date 2019/12/30  11:53
+     */
+    @Override
+    public void deleteStudent(Integer id) {
+        int row = studentMapper.deleteStudent(id);
+        if(row != 1){
+            throw new BaseRuntimeException(500,"删除失败！");
         }
     }
 }

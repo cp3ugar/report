@@ -18,7 +18,7 @@ import java.io.InputStream;
  * @Version 1.0
  */
 @Controller
-public class ImportController {
+public class ImportController extends BaseController{
     @Autowired
     private ImportService importService;
 

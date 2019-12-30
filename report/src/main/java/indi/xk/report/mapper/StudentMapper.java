@@ -7,10 +7,7 @@ import indi.xk.report.pojo.Ssbqxx;
 import indi.xk.report.pojo.Ssxx;
 import indi.xk.report.pojo.Sszxxx;
 import indi.xk.report.pojo.dto.StudentDTO;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -50,4 +47,20 @@ public interface StudentMapper {
     @Insert("insert into student (student_id,`name`,sex,age,birthday) " +
             "values (#{studentId},#{name},#{sex},#{age},#{birthday})")
     int addStudent(StudentDTO student);
+
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
+    @Delete("delete from student where id = #{id}")
+    int deleteStudent(Integer id);
+
+    /**
+     * 查询学号是否重复
+     * @param studentId
+     * @return
+     */
+    @Select("select count(*) from student where student_id = #{studentId}")
+    int queryStudentByStudentId(Integer studentId);
 }

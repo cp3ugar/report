@@ -25,4 +25,10 @@ public interface StudentService {
      * @param student
      */
     void addStudent(StudentDTO student);
+
+    /**
+     * 删除
+     * @param id
+     */
+    void deleteStudent(Integer id);
 }

@@ -1,5 +1,9 @@
 package indi.xk.report.pojo;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -13,12 +17,16 @@ public class Student {
     private Integer id;
 
     @NotNull(message = "学号不能为空！")
+    @Min(value = 1001,message = "学号必须为四位！")
+    @Max(value = 9999,message = "学号必须为四位！")
     private Integer studentId;
 
     @NotBlank(message = "姓名不能为空！")
     private String name;
 
     @NotNull(message = "年龄不能为空！")
+    @Min(value = 1,message = "年龄必须大于0！")
+    @Max(value = 200,message = "年龄必须小于200！")
     private Integer age;
 
     @NotBlank(message = "性别不能为空！")
