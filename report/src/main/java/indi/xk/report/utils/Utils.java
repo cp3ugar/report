@@ -74,7 +74,7 @@ public class Utils {
         if(Utils.isEmpty(date)){
             return "";
         }
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         String dateString = formatter.format(date);
         return dateString;
     }
