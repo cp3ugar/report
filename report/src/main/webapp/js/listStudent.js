@@ -37,8 +37,8 @@ window.onload = function () {
                     '    <div class="layui-form-item">\n' +
                     '        <label class="layui-form-label">性别</label>\n' +
                     '        <div class="layui-input-block" id="sex">\n' +
-                    '            <input type="radio" name="sex" value="男" title="男" checked="">\n' +
-                    '            <input type="radio" name="sex" value="女" title="女">\n' +
+                    '            <input type="radio" name="sex" value="m" title="男" checked="">\n' +
+                    '            <input type="radio" name="sex" value="f" title="女">\n' +
                     '        </div>\n' +
                     '    </div>\n' +
                     '    <div class="layui-form-item">\n' +
@@ -77,7 +77,7 @@ window.onload = function () {
                             if (data.code == 0) {
                                 layer.msg(data.msg);
                                 layer.close(index);
-                                setTimeout('window.location.reload()',100);
+                                setTimeout('window.location.reload()',500);
                             }else{
                                 layer.msg(data.msg);
                             }
@@ -130,7 +130,7 @@ window.onload = function () {
             , done: function (data) {
                 if (data.code == 0) {
                     layer.msg(data.msg);
-                    setTimeout('window.location.reload()',100);
+                    setTimeout('window.location.reload()',500);
                 }else{
                     layer.msg(data.msg);
                 }
@@ -145,7 +145,7 @@ window.onload = function () {
             , done: function (data) {
                 if (data.code == 0) {
                     layer.msg(data.msg);
-                    setTimeout('window.location.reload()',100);
+                    setTimeout('window.location.reload()',500);
                 }else{
                     layer.msg(data.msg);
                 }
@@ -180,7 +180,7 @@ window.onload = function () {
         table.on('tool(test)', function (obj) {
             var data = obj.data;
             console.log(data);
-            layer.confirm('真的删除行么', function (index) {
+            layer.confirm('确定删除该学生？', function (index) {
                 $.ajax({
                     url: '/deleteStudent',
                     type: 'get',
@@ -192,7 +192,7 @@ window.onload = function () {
                             layer.msg(data.msg);
                             obj.del();
                             layer.close(index);
-                            setTimeout('window.location.reload()',100);
+                            setTimeout('window.location.reload()',500);
                         }else{
                             layer.msg(data.msg);
                         }

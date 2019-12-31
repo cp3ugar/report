@@ -24,7 +24,7 @@
 <body background="../../img/bg.jpg" onload="startTime()">
 <div id="textDiv">
     <a href="/toListStudent">
-        <i id="in" class="layui-icon layui-icon-release" style="font-size:80px;color: white"></i>
+        <i id="comeIn" class="layui-icon" style="font-size:80px;color: white"></i>
     </a>
 </div>
 </body>
@@ -42,7 +42,7 @@
         hour = checkTime(hour);
         minute = checkTime(minute);
         second = checkTime(second);
-        document.getElementById('in').innerHTML=year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
+        document.getElementById('comeIn').innerHTML=year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
         setInterval(function(){
             startTime()
         },1000)

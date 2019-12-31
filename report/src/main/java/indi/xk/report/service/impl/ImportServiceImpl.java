@@ -4,17 +4,23 @@ import indi.xk.report.mapper.ImportMapper;
 import indi.xk.report.mapper.StudentMapper;
 import indi.xk.report.pojo.*;
 import indi.xk.report.pojo.dto.StudentDTO;
+import indi.xk.report.pojo.dto.StudentImportDTO;
 import indi.xk.report.service.ImportService;
-import indi.xk.report.utils.BaseRuntimeException;
-import indi.xk.report.utils.Utils;
+import indi.xk.report.utils.*;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.util.IOUtils;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -23,58 +29,192 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-
+/**
+ * @author xk
+ */
 @Service
-public class ImportServiceImpl implements ImportService {
+public class ImportServiceImpl extends BaseImportExcel implements ImportService {
     @Autowired
     private StudentMapper studentMapper;
 
     @Autowired
     private ImportMapper importMapper;
 
+    @Value("${local.path}")
+    private String localPath;
+
+
+
     /**
      * 导入学生
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void importStudent(InputStream is) throws IOException {
-        List<StudentDTO> students = new ArrayList<>();
-        HSSFWorkbook book = new HSSFWorkbook(is);
+    public BatchImportResultDTO importStudent(MultipartFile file) throws IOException {
+        HSSFWorkbook book;
+        InputStream inputStream;
+        InputStream is;
+        File targetFile;
+        try {
+            inputStream = file.getInputStream();
+            InputStream is1 = file.getInputStream();
+            book = new HSSFWorkbook(inputStream);
+            byte[] bytes = IOUtils.toByteArray(is1);
+            is = new ByteArrayInputStream(bytes);
+            String tempPath = localPath + Utils.getUUid("student_") + file.getOriginalFilename();
+            targetFile = Utils.getCopyFile(localPath, tempPath, is);
+        } catch (Exception e) {
+            throw new BaseRuntimeException(2, "文件解析异常");
+        }
+
+        List<StudentImportDTO> allData = new ArrayList<>();
+        List<StudentImportDTO> correctData = new ArrayList<>();
+        List<StudentImportDTO> errorData = new ArrayList<>();
         HSSFSheet sheet = book.getSheetAt(0);
 
-        /**
-         * 通常第一行都是标题，所以从第二行开始读取数据
-         */
         for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
             HSSFRow row = sheet.getRow(i);
             row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
-            row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);
-            row.getCell(2).setCellType(Cell.CELL_TYPE_STRING);
-            row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
-            row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
-            //名称
             Integer studentId = Integer.valueOf(row.getCell(0).getStringCellValue());
-            String name = row.getCell(1).getStringCellValue();
-            String sex = row.getCell(2).getStringCellValue();
-            Integer age = Integer.valueOf(row.getCell(3).getStringCellValue());
-            String birthday = row.getCell(4).getStringCellValue();
-            StudentDTO student = new StudentDTO();
+            String name;
+            if(Utils.isEmpty(row.getCell(1))){
+                name = "";
+            }else{
+                name = row.getCell(1).getStringCellValue();
+            }
+            String sex;
+            if(Utils.isEmpty(row.getCell(2))){
+                sex = "";
+            }else{
+                sex = row.getCell(2).getStringCellValue();
+            }
+            Integer age;
+            if(Utils.isEmpty(row.getCell(3))){
+                age = 0;
+            }else{
+                row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
+                age = Integer.valueOf(row.getCell(3).getStringCellValue());
+            }
+            String birthday;
+            if(Utils.isEmpty(row.getCell(4))){
+                birthday = Utils.getNowTime("yyyy/MM/dd");
+            }else{
+                row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
+                birthday = row.getCell(4).getStringCellValue();
+            }
+
+            StudentImportDTO student = new StudentImportDTO();
             student.setStudentId(studentId);
             student.setName(name);
             student.setSex(sex);
             student.setAge(age);
             student.setBirthday(birthday);
-            students.add(student);
+
+            //处理数据
+            int res = studentMapper.queryStudentByStudentId(studentId);
+            if(res > 0){
+                student.setError(true);
+                student.setErrorInfo(student.getErrorInfo()+"学号重复;");
+                errorData.add(student);
+            }
+            validateStudentId(student);
+            validateNotNull(student,student.getName(),"姓名");
+            convertSex(student);
+            validateAge(student);
+            validateBirthday(student);
+            allData.add(student);
         }
-        for (StudentDTO student : students) {
-            System.err.println(student);
+        for (StudentImportDTO student : allData) {
+            if (student.isError()) {
+                errorData.add(student);
+            } else {
+                correctData.add(student);
+            }
+        }
+        for(StudentImportDTO studentDTO : errorData){
+            System.out.println(studentDTO);
         }
         //批量保存
-        if (Utils.isNotEmpty(students)) {
-            studentMapper.batchInsert(students);
+        if (Utils.isNotEmpty(correctData)) {
+            studentMapper.importStudent(correctData);
+        }
+        return generateErrorFile(targetFile, allData);
+    }
+
+    /**
+     * 验证生日
+     * @param student
+     */
+    private void validateBirthday(StudentImportDTO student) {
+        String birthday = student.getBirthday();
+        validateNotNull(student,birthday,"生日");
+        boolean isBirthday = Utils.validDate(birthday,"yyyy-MM-dd");
+        if(!isBirthday){
+            student.setError(true);
+            student.setErrorInfo(student.getErrorInfo() + "生日格式错误;");
+        }
+        String now = Utils.getNowTime("yyyy-MM-dd");
+        if(birthday.compareTo(now) >= 0){
+            student.setError(true);
+            student.setErrorInfo(student.getErrorInfo() + "生日日期错误;");
         }
     }
 
+    /**
+     * 验证年龄
+     * @param student
+     */
+    private void validateAge(StudentImportDTO student) {
+        Integer age = student.getAge();
+        validateNotNull(student,age,"年龄");
+        if(age < 7 || age > 30){
+            student.setError(true);
+            student.setErrorInfo(student.getErrorInfo() + "年龄错误;");
+        }
+    }
+
+    /**
+     * 性别转换
+     * @param student
+     */
+    private void convertSex(StudentImportDTO student) {
+        String sex = student.getSex();
+        validateNotNull(student,sex,"性别");
+        if("男".equals(sex)){
+            student.setSex("m");
+        }else if("女".equals(sex)){
+            student.setSex("f");
+        }else{
+            student.setError(true);
+            student.setErrorInfo(student.getErrorInfo() + "性别错误;");
+        }
+    }
+
+    /**
+     * 验证非空
+     * @param source
+     */
+    private void validateNotNull(StudentImportDTO source,Object getter,String describe) {
+        if (Utils.isEmpty(getter)) {
+            source.setError(true);
+            source.setErrorInfo(source.getErrorInfo() + describe + "不能为空;");
+        }
+    }
+
+    /**
+     * 验证学号
+     * @param student
+     */
+    private void validateStudentId(StudentImportDTO student) {
+        Integer studentId = student.getStudentId();
+        validateNotNull(student,studentId,"学号");
+        if (Utils.isNotEmpty(student.getStudentId())) {
+            if (studentId > 9999 || studentId < 1000) {
+                student.setError(true);
+                student.setErrorInfo(student.getErrorInfo() + "学号必须为4位;");
+            }
+        }
+    }
 
     /**
      * 导入诉讼台账

@@ -12,7 +12,8 @@ mybatis:
   #配置映射类包名
   type-aliases-package: indi.xk.report
 
-
+local:
+  path: C:\Users\Administrator\Downloads\
 student:
   name: 四张张
   age: 18

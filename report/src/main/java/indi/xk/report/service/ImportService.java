@@ -1,6 +1,8 @@
 package indi.xk.report.service;
 
+import indi.xk.report.utils.BatchImportResultDTO;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,10 +16,10 @@ import java.io.InputStream;
 public interface ImportService {
     /**
      * 导入学生
-     * @param is
+     * @param file
      * @throws IOException
      */
-    void importStudent(InputStream is) throws IOException;
+    BatchImportResultDTO importStudent(MultipartFile file) throws IOException;
 
     /**
      * 导入诉讼台账

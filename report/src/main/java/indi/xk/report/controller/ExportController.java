@@ -75,7 +75,7 @@ public class ExportController extends BaseController{
                     HSSFRichTextString richString = new HSSFRichTextString(obj);
                     HSSFFont font3 = workbook.createFont();
                     //定义Excel数据颜色，这里设置为蓝色
-                    font3.setColor(HSSFColor.BLUE.index);
+                    font3.setColor(HSSFColor.BLACK.index);
                     richString.applyFont(font3);
                     cell.setCellValue(richString);
                 }

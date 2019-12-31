@@ -2,6 +2,7 @@ package indi.xk.report.mapper;
 
 
 import indi.xk.report.pojo.dto.StudentDTO;
+import indi.xk.report.pojo.dto.StudentImportDTO;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
@@ -58,4 +59,10 @@ public interface StudentMapper {
      */
     @Select("select count(*) from student where student_id = #{studentId}")
     int queryStudentByStudentId(Integer studentId);
+
+    /**
+     * 导入学生
+     * @param correctData
+     */
+    void importStudent(List<StudentImportDTO> correctData);
 }

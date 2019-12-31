@@ -42,4 +42,26 @@
         )
         </foreach>
     </insert>
+
+    <!-- 导入学生 -->
+    <insert id="importStudent">
+        insert into student
+        (
+        student_id,
+        `name`,
+        sex,
+        age,
+        birthday
+        )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.studentId},
+            #{item.name},
+            #{item.sex},
+            #{item.age},
+            #{item.birthday}
+            )
+        </foreach>
+    </insert>
 </mapper>
