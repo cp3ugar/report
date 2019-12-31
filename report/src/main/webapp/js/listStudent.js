@@ -137,6 +137,21 @@ window.onload = function () {
             }
         });
 
+        //导入诉讼台账
+        upload.render({
+            elem: '#importLitigation'
+            , url: '/importLitigation'
+            , accept: 'file'
+            , done: function (data) {
+                if (data.code == 0) {
+                    layer.msg(data.msg);
+                    setTimeout('window.location.reload()',100);
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+
         //头工具栏事件
         table.on('toolbar(test)', function (obj) {
             var checkStatus = table.checkStatus(obj.config.id);

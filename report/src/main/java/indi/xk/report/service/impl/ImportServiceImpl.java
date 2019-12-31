@@ -33,11 +33,11 @@ public class ImportServiceImpl implements ImportService {
     private ImportMapper importMapper;
 
     /**
-     * 导入excel
+     * 导入学生
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void importExcel(InputStream is) throws IOException {
+    public void importStudent(InputStream is) throws IOException {
         List<StudentDTO> students = new ArrayList<>();
         HSSFWorkbook book = new HSSFWorkbook(is);
         HSSFSheet sheet = book.getSheetAt(0);
@@ -77,11 +77,11 @@ public class ImportServiceImpl implements ImportService {
 
 
     /**
-     * 导入excel
+     * 导入诉讼台账
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void importExcelToThreeTable(InputStream is) throws IOException {
+    public void importLitigation(InputStream is) throws IOException {
         List<Ssbqxx> ssbqxxs = new ArrayList<>();
         List<Ssbgxx> ssbgxxs = new ArrayList<>();
         List<Ssxx> ssxxs = new ArrayList<>();
@@ -104,7 +104,8 @@ public class ImportServiceImpl implements ImportService {
             String bqfs = row.getCell(3).getStringCellValue();
             String sflhcf = row.getCell(4).getStringCellValue();
             String cqzt = row.getCell(5).getStringCellValue();
-            if (row.getCell(6).getCellType() != Cell.CELL_TYPE_BLANK && row.getCell(6).getCellType() != Cell.CELL_TYPE_NUMERIC) {
+            if (row.getCell(6).getCellType() != Cell.CELL_TYPE_BLANK
+                    && row.getCell(6).getCellType() != Cell.CELL_TYPE_NUMERIC) {
                 throw new BaseRuntimeException(500, "日期格式不正确！");
             }
             Date bqqsrDate = row.getCell(6).getDateCellValue();
@@ -174,12 +175,14 @@ public class ImportServiceImpl implements ImportService {
             String jkid = row.getCell(0).getStringCellValue();
             String dfmc = row.getCell(2).getStringCellValue();
             String jkrzjh = row.getCell(3).getStringCellValue();
-            if (row.getCell(4).getCellType() != Cell.CELL_TYPE_BLANK && row.getCell(4).getCellType() != Cell.CELL_TYPE_NUMERIC) {
+            if (row.getCell(4).getCellType() != Cell.CELL_TYPE_BLANK
+                    && row.getCell(4).getCellType() != Cell.CELL_TYPE_NUMERIC) {
                 throw new BaseRuntimeException(500, "日期格式不正确！");
             }
             Date larqDate = row.getCell(4).getDateCellValue();
             String larq = Utils.getStringDate(larqDate,"yyyy/MM/dd");
-            if (row.getCell(6).getCellType() != Cell.CELL_TYPE_BLANK && row.getCell(6).getCellType() != Cell.CELL_TYPE_NUMERIC) {
+            if (row.getCell(6).getCellType() != Cell.CELL_TYPE_BLANK
+                    && row.getCell(6).getCellType() != Cell.CELL_TYPE_NUMERIC) {
                 throw new BaseRuntimeException(500, "日期格式不正确！");
             }
             Date fqrqDate = row.getCell(6).getDateCellValue();
@@ -193,7 +196,8 @@ public class ImportServiceImpl implements ImportService {
                 bde = new BigDecimal(bdeStr);
             }
             String sljg = row.getCell(11).getStringCellValue();
-            if (row.getCell(12).getCellType() != Cell.CELL_TYPE_BLANK && row.getCell(12).getCellType() != Cell.CELL_TYPE_NUMERIC) {
+            if (row.getCell(12).getCellType() != Cell.CELL_TYPE_BLANK
+                    && row.getCell(12).getCellType() != Cell.CELL_TYPE_NUMERIC) {
                 throw new BaseRuntimeException(500, "日期格式不正确！");
             }
             if (Utils.isNotEmpty(row.getCell(10).getStringCellValue())) {
@@ -202,7 +206,8 @@ public class ImportServiceImpl implements ImportService {
             Date pjrDate = row.getCell(12).getDateCellValue();
             String pjr = Utils.getStringDate(pjrDate,"yyyy/MM/dd");
             String pjsah = row.getCell(13).getStringCellValue();
-            if (row.getCell(14).getCellType() != Cell.CELL_TYPE_BLANK && row.getCell(14).getCellType() != Cell.CELL_TYPE_NUMERIC) {
+            if (row.getCell(14).getCellType() != Cell.CELL_TYPE_BLANK
+                    && row.getCell(14).getCellType() != Cell.CELL_TYPE_NUMERIC) {
                 throw new BaseRuntimeException(500, "日期格式不正确！");
             }
             Date flwssxrDate = row.getCell(14).getDateCellValue();
@@ -210,7 +215,8 @@ public class ImportServiceImpl implements ImportService {
             String zxah = row.getCell(16).getStringCellValue();
             String zxfy = row.getCell(17).getStringCellValue();
             String zxfg = row.getCell(18).getStringCellValue();
-            if (row.getCell(19).getCellType() != Cell.CELL_TYPE_BLANK && row.getCell(19).getCellType() != Cell.CELL_TYPE_NUMERIC) {
+            if (row.getCell(19).getCellType() != Cell.CELL_TYPE_BLANK
+                    && row.getCell(19).getCellType() != Cell.CELL_TYPE_NUMERIC) {
                 throw new BaseRuntimeException(500, "日期格式不正确！");
             }
             Date ssxmdrqDate = row.getCell(19).getDateCellValue();

@@ -10,9 +10,7 @@ import org.apache.poi.hssf.util.HSSFColor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -29,6 +27,11 @@ public class ExportController extends BaseController{
     @Autowired
     private StudentService studentService;
 
+    /**
+     * 导出学生
+     * @param response
+     * @throws IOException
+     */
     @GetMapping("/export")
     public void exportExcel(HttpServletResponse response) throws IOException {
             String[] headers = {"学号", "姓名","性别","年龄","出生年月"};
@@ -88,6 +91,7 @@ public class ExportController extends BaseController{
             //将workbook中的内容写入输出流中
             workbook.write(response.getOutputStream());
     }
+
     @RequestMapping("/exportLitigationLoan")
     public void execlLitigationLoan(HttpServletResponse response){
             String[] hearder={"机构名称","立案起数","涉诉贷款起数","涉案本金","涉案利息","判决期数"};

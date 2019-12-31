@@ -12,7 +12,17 @@ import java.io.InputStream;
  */
 @Component
 public interface ImportService {
-    void importExcel(InputStream is) throws IOException;
+    /**
+     * 导入学生
+     * @param is
+     * @throws IOException
+     */
+    void importStudent(InputStream is) throws IOException;
 
-    void importExcelToThreeTable(InputStream is) throws IOException;
+    /**
+     * 导入诉讼台账
+     * @param is
+     * @throws IOException
+     */
+    void importLitigation(InputStream is) throws IOException;
 }

@@ -22,19 +22,19 @@ public class ImportController extends BaseController{
     @Autowired
     private ImportService importService;
 
-//    @PostMapping("/import")
-//    @ResponseBody
-//    public ReturnObject importExcel(@RequestParam("file") MultipartFile file) throws IOException {
-//        InputStream is = file.getInputStream();
-//        importService.importExcel(is);
-//        return ReturnObject.outSuccess("导入成功！");
-//    }
-
     @PostMapping("/import")
     @ResponseBody
-    public ReturnObject importExcelToThreeTable(@RequestParam("file") MultipartFile file) throws IOException {
+    public ReturnObject importStudent(@RequestParam("file") MultipartFile file) throws IOException {
         InputStream is = file.getInputStream();
-        importService.importExcelToThreeTable(is);
+        importService.importStudent(is);
+        return ReturnObject.outSuccess("导入成功！");
+    }
+
+    @PostMapping("/importLitigation")
+    @ResponseBody
+    public ReturnObject importLitigation(@RequestParam("file") MultipartFile file) throws IOException {
+        InputStream is = file.getInputStream();
+        importService.importLitigation(is);
         return ReturnObject.outSuccess("导入成功！");
     }
 }

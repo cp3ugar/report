@@ -1,10 +1,6 @@
 package indi.xk.report.service.impl;
 
 import indi.xk.report.mapper.StudentMapper;
-import indi.xk.report.pojo.Ssbgxx;
-import indi.xk.report.pojo.Ssbqxx;
-import indi.xk.report.pojo.Ssxx;
-import indi.xk.report.pojo.Student;
 import indi.xk.report.pojo.dto.StudentDTO;
 import indi.xk.report.service.StudentService;
 import indi.xk.report.utils.BaseRuntimeException;
@@ -13,9 +9,6 @@ import indi.xk.report.utils.PagingUtil;
 import indi.xk.report.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,7 +25,7 @@ public class StudentServiceImpl implements StudentService {
     private StudentMapper studentMapper;
 
     /**
-     * list
+     * 列表
      * @param
      * @return
      * @author xk

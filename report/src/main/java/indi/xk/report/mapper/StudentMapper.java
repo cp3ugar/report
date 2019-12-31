@@ -1,11 +1,6 @@
 package indi.xk.report.mapper;
 
 
-import indi.xk.report.pojo.*;
-import indi.xk.report.pojo.Ssbgxx;
-import indi.xk.report.pojo.Ssbqxx;
-import indi.xk.report.pojo.Ssxx;
-import indi.xk.report.pojo.Sszxxx;
 import indi.xk.report.pojo.dto.StudentDTO;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
@@ -22,13 +17,13 @@ import java.util.Map;
 @Component
 public interface StudentMapper {
     /**
-     * list数量
+     * 列表数量
      * @return
      */
     Integer count();
 
     /**
-     * list
+     * 列表
      * @return
      */
     List<StudentDTO> findAll(Map map);

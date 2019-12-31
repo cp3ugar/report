@@ -3,7 +3,7 @@
 <html ng-app="Module">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>学生列表</title>
+    <title>Welcome</title>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="">
     <script type="text/javascript" src="../../js/jquery-3.4.1.min.js"></script>
@@ -21,10 +21,36 @@
         font-size: 100px;
     }
 </style>
-<body background="../../img/bg.jpg">
+<body background="../../img/bg.jpg" onload="startTime()">
 <div id="textDiv">
     <a href="/toListStudent">
-        <i id="in" class="layui-icon layui-icon-release" style="font-size:80px;color: white">   ${now}</i>
+        <i id="in" class="layui-icon layui-icon-release" style="font-size:80px;color: white"></i>
     </a>
 </div>
 </body>
+<script>
+    function startTime(){
+        var nowTime = new Date();
+        var year = nowTime.getFullYear();
+        var month = nowTime.getMonth()+1;
+        var day = nowTime.getDate();
+        var hour = nowTime.getHours();
+        var minute = nowTime.getMinutes();
+        var second = nowTime.getSeconds();
+        month = checkTime(month);
+        day = checkTime(day);
+        hour = checkTime(hour);
+        minute = checkTime(minute);
+        second = checkTime(second);
+        document.getElementById('in').innerHTML=year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
+        setInterval(function(){
+            startTime()
+        },1000)
+    }
+    function checkTime(i){
+        if(i<10){
+            i = "0"+i;
+        }
+        return i;
+    }
+</script>

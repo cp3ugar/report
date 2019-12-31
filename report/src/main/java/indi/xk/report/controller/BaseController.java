@@ -22,6 +22,13 @@ import java.util.List;
 public class BaseController {
     private final String BRE = "BaseRuntimeException";
 
+    /**
+     * 异常捕获
+     * @param
+     * @return
+     * @author xk
+     * @date 2019/12/31  9:51
+     */
     @ExceptionHandler(RuntimeException.class)
     @ResponseBody
     public ReturnObject<String> exception(HttpServletRequest request, HttpServletResponse response, RuntimeException e) {
