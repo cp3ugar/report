@@ -140,7 +140,7 @@ window.onload = function () {
         //导入诉讼台账
         upload.render({
             elem: '#importLitigation'
-            , url: '/importLitigation'
+            , url: '/import1'
             , accept: 'file'
             , done: function (data) {
                 if (data.code == 0) {

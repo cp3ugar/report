@@ -36,7 +36,7 @@ public class MyImportServiceImpl implements MyImportService {
         HSSFWorkbook book=new HSSFWorkbook(is);
         HSSFSheet ssbqxxSheet=book.getSheetAt(0);
         //查封台账
-        for (int i = 0; i <ssbqxxSheet.getLastRowNum()+1 ; i++) {
+        for (int i = 1; i <ssbqxxSheet.getLastRowNum()+1 ; i++) {
             HSSFRow row =ssbqxxSheet.getRow(i);
             String bqid= UUID.randomUUID().toString();
             String ssid=row.getCell(0).getStringCellValue();
@@ -45,15 +45,8 @@ public class MyImportServiceImpl implements MyImportService {
             String bqfs=row.getCell(3).getStringCellValue();
             String sflhcf=row.getCell(4).getStringCellValue();
             String cqzt=row.getCell(5).getStringCellValue();
-//            if (row.getCell(6).getCellType()!= Cell.CELL_TYPE_BLANK&&row.getCell(6).getCellType()!=Cell.CELL_TYPE_BOOLEAN){
-//                throw new BaseRuntimeException(500,"日期格式错误");
-//            }
-//            if(row.getCell(6).getCellType()== Cell.CELL_TYPE_STRING){
-//                row.getCell(6).setCellType(Cell.CELL_TYPE_NUMERIC);
-//            }
-            if(row.getCell(6)!=null){
-                row.getCell(6).setCellType(Cell.CELL_TYPE_NUMERIC);
-
+            if (row.getCell(6).getCellType()!= Cell.CELL_TYPE_BLANK&&row.getCell(6).getCellType()!=Cell.CELL_TYPE_NUMERIC){
+                throw new BaseRuntimeException(500,"日期格式错误！");
             }
             Date bqqsrDate =row.getCell(6).getDateCellValue();
             String bqqsr= Utils.getStringDate(bqqsrDate,"yyyy/MM/dd");
