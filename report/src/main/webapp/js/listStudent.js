@@ -129,8 +129,8 @@ window.onload = function () {
             , accept: 'file'
             , done: function (data) {
                 if (data.code == 0) {
-                    layer.msg(data.msg);
-                    setTimeout('window.location.reload()',500);
+                    layer.alert(data.msg);
+                    // setTimeout('window.location.reload()',1000);
                 }else{
                     layer.msg(data.msg);
                 }
@@ -145,7 +145,7 @@ window.onload = function () {
             , done: function (data) {
                 if (data.code == 0) {
                     layer.msg(data.msg);
-                    setTimeout('window.location.reload()',500);
+                    setTimeout('window.location.reload()',1000);
                 }else{
                     layer.msg(data.msg);
                 }

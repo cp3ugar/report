@@ -21,6 +21,10 @@ public abstract class BaseImportExcel {
     @Value("${local.path}")
     private String localPath;
 
+    @Value("${local.prexPath}")
+    private String prexPath;
+
+
 
     /**
      * 输出错误文件

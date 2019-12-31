@@ -3,16 +3,17 @@ package indi.xk.report.service.impl;
 import indi.xk.report.mapper.ImportMapper;
 import indi.xk.report.mapper.StudentMapper;
 import indi.xk.report.pojo.*;
-import indi.xk.report.pojo.dto.StudentDTO;
 import indi.xk.report.pojo.dto.StudentImportDTO;
 import indi.xk.report.service.ImportService;
-import indi.xk.report.utils.*;
+import indi.xk.report.utils.BaseImportExcel;
+import indi.xk.report.utils.BaseRuntimeException;
+import indi.xk.report.utils.BatchImportResultDTO;
+import indi.xk.report.utils.Utils;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.util.IOUtils;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -50,7 +51,7 @@ public class ImportServiceImpl extends BaseImportExcel implements ImportService 
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public BatchImportResultDTO importStudent(MultipartFile file) throws IOException {
+    public void importStudent(MultipartFile file) throws IOException {
         HSSFWorkbook book;
         InputStream inputStream;
         InputStream is;
@@ -138,7 +139,15 @@ public class ImportServiceImpl extends BaseImportExcel implements ImportService 
         if (Utils.isNotEmpty(correctData)) {
             studentMapper.importStudent(correctData);
         }
-        return generateErrorFile(targetFile, allData);
+        BatchImportResultDTO res = generateErrorFile(targetFile, allData);
+        String filePath = res.getErrorFileAddress();
+        System.out.println(filePath);
+        Runtime.getRuntime().exec("cmd /c start "+filePath);
+//        String path = System.getProperty("user.home");
+//        String dirPath = path +  "\\Downloads\\ErrorFile\\";
+//        System.out.println(filePath);
+//        String cmdDir[] = { "explorer.exe", dirPath };
+//        Runtime.getRuntime().exec(cmdDir);
     }
 
     /**

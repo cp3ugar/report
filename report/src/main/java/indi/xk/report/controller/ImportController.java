@@ -25,16 +25,17 @@ public class ImportController extends BaseController{
 
     @PostMapping("/import")
     @ResponseBody
-    public ReturnObject<String> importStudent(@RequestParam("file") MultipartFile file) throws IOException {
+    public ReturnObject importStudent(@RequestParam("file") MultipartFile file) throws IOException {
         try {
             if (null == file || file.getSize() == 0) {
                 throw new BaseRuntimeException(400, "文件不能为空！");
             }
-            return new ReturnObject(importService.importStudent(file));
+            importService.importStudent(file);
+            return ReturnObject.outSuccess("导入详情请查看自动打开的文件！");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return ReturnObject.outSuccess("导入失败！");
+        return ReturnObject.outError("导入失败！");
     }
 
     @PostMapping("/importLitigation")
