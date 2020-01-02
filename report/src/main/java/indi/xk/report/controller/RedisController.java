@@ -1,5 +1,6 @@
 package indi.xk.report.controller;
 
+import indi.xk.report.constance.Constance;
 import indi.xk.report.pojo.Student;
 import indi.xk.report.utils.RedisUtil;
 import indi.xk.report.utils.ReturnObject;
@@ -16,11 +17,6 @@ import java.util.Date;
  */
 @RestController
 public class RedisController {
-    /**
-     * redis中存储的过期时间60s
-     */
-    private static int ExpireTime = 60;
-
     @Resource
     private RedisUtil redisUtil;
 
@@ -37,7 +33,7 @@ public class RedisController {
         student.setName("张三");
         student.setAge(20);
         student.setBirthday(new Date().toString());
-        return new ReturnObject(0,"",0,redisUtil.set(key,student,ExpireTime));
+        return new ReturnObject(0,"",0,redisUtil.set(key,student,Constance.EXPIRE_TIME));
     }
 
     @RequestMapping("get")
@@ -47,6 +43,6 @@ public class RedisController {
 
     @RequestMapping("expire")
     public ReturnObject expire(String key){
-        return new ReturnObject(0,"",0,redisUtil.expire(key,ExpireTime));
+        return new ReturnObject(0,"",0,redisUtil.expire(key, Constance.EXPIRE_TIME));
     }
 }

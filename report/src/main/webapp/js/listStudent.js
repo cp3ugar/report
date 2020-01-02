@@ -115,7 +115,7 @@ window.onload = function () {
                 , {field: 'id', title: 'ID', sort: true, fixed: 'left'}
                 , {field: 'studentId', title: '学号'}
                 , {field: 'name', title: '姓名', sort: true}
-                , {field: 'sex', title: '性别'}
+                , {field: 'sexStr', title: '性别'}
                 , {field: 'age', title: '年龄'}
                 , {field: 'birthday', title: '生日', sort: true}
                 , {fixed: 'right', title: '操作', toolbar: '#barDemo'}
