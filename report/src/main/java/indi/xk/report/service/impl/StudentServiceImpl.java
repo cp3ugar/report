@@ -44,7 +44,7 @@ public class StudentServiceImpl implements StudentService {
         }
         for(StudentDTO student : list){
             //性别转换
-            student.setSexStr(Constance.STUDENT_MALE.equals(student.getSex()) ? "男" : "女");
+            student.setSexStr(Constance.STUDENT_SEX_MALE.equals(student.getSex()) ? "男" : "女");
         }
         pageView.setRecords(list);
         return pageView;

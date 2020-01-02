@@ -15,6 +15,6 @@ public class Constance {
     /**
      * Student性别
      */
-    public static final String STUDENT_MALE = "m";
-    public static final String STUDENT_FEMALE = "f";
+    public static final String STUDENT_SEX_MALE = "m";
+    public static final String STUDENT_SEX_FEMALE = "f";
 }
