@@ -1,5 +1,7 @@
 package indi.xk.report.pojo;
 
+import org.springframework.data.annotation.Id;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -10,7 +12,7 @@ import javax.validation.constraints.NotNull;
  * @Date 2019/12/17 11:52
  * @Version 1.0
  */
-public class Student{
+public class Student {
     private Integer id;
 
     @NotNull(message = "学号不能为空！")

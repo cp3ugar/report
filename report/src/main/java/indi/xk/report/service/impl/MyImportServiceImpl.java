@@ -50,6 +50,7 @@ public class MyImportServiceImpl implements MyImportService {
             }
             Date bqqsrDate =row.getCell(6).getDateCellValue();
             String bqqsr= Utils.getStringDate(bqqsrDate,"yyyy/MM/dd");
+            row.getCell(7).setCellType(Cell.CELL_TYPE_STRING);
             String bqccjz=row.getCell(7).getStringCellValue();
             String czzt=row.getCell(8).getStringCellValue();
             String sfxf=row.getCell(9).getStringCellValue();

@@ -43,11 +43,14 @@ public class ShiroController {
         return "/login";
     }
 
+    @RequestMapping("/success")
+    public String success(){
+        return "/success";
+    }
     @RequestMapping("/noAuth")
     public String noAuth(){
         return "/noAuth";
     }
-
     /**
      * 测试thymeleaf
      */
@@ -81,7 +84,9 @@ public class ShiroController {
 
             //登录成功
             //跳转到test.html
-            return "redirect:/toListStudent";
+//            return "redirect:/success";
+            model.addAttribute("subject",subject);
+            return "success";
         } catch (UnknownAccountException e) {
             //e.printStackTrace();
             //登录失败:用户名不存在

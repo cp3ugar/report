@@ -1,5 +1,6 @@
 package indi.xk.report.service.impl;
 
+import indi.xk.report.constance.Constance;
 import indi.xk.report.mapper.StudentMapper;
 import indi.xk.report.pojo.dto.StudentDTO;
 import indi.xk.report.service.StudentService;
@@ -40,6 +41,10 @@ public class StudentServiceImpl implements StudentService {
         List<StudentDTO> list = studentMapper.findAll(map);
         if (Utils.isEmpty(pageView)) {
             pageView = new PageView();
+        }
+        for(StudentDTO student : list){
+            //性别转换
+            student.setSexStr(Constance.STUDENT_SEX_MALE.equals(student.getSex()) ? "男" : "女");
         }
         pageView.setRecords(list);
         return pageView;
