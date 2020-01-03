@@ -34,6 +34,18 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
+#  jpa:
+#    hibernate:
+#      ddl-auto: update  #新增数据库链接必备的参数
   jpa:
-    hibernate:
-      ddl-auto: update  #新增数据库链接必备的参数
+      hibernate:
+        ddl-auto: update
+        naming:
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl #按字段名字建表
+      show-sql: true
+      database: mysql
+      database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  thymeleaf:
+         cache: false
+         mode: LEGACYHTML5
+         prefix: /WEB-INF/views/
