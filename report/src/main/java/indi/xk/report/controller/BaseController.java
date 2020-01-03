@@ -1,5 +1,6 @@
 package indi.xk.report.controller;
 
+import indi.xk.report.constance.Constance;
 import indi.xk.report.utils.BaseRuntimeException;
 import indi.xk.report.utils.ReturnObject;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -20,8 +21,6 @@ import java.util.List;
  */
 @ControllerAdvice
 public class BaseController {
-    private final String BRE = "BaseRuntimeException";
-
     /**
      * 异常捕获
      * @param
@@ -33,7 +32,7 @@ public class BaseController {
     @ResponseBody
     public ReturnObject<String> exception(HttpServletRequest request, HttpServletResponse response, RuntimeException e) {
         e.printStackTrace();
-        if (e instanceof BaseRuntimeException || e.getClass().getName().contains(BRE)) {
+        if (e instanceof BaseRuntimeException || e.getClass().getName().contains(Constance.BRE)) {
             BaseRuntimeException be = (BaseRuntimeException) e;
             return new ReturnObject<>(be.getErrorCode(), be.getMessage());
         }

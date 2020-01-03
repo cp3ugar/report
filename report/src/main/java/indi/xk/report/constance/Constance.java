@@ -6,6 +6,8 @@ package indi.xk.report.constance;
  * @Version 1.0
  */
 public class Constance {
+    public static final String BRE = "BaseRuntimeException";
+
     /**
      * redis过期时间
      * 单位：s

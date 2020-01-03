@@ -1,29 +1,30 @@
 package indi.xk.report.utils;
 
 /**
+ * @author xk
  * 这是一个分页工具
  * 主要用于显示页码
- * pagecode要获得记录的开始索引即开始页码
+ * pageCode要获得记录的开始索引即开始页码
  * pageNow当前页 　pageCount总页数
  * 这个工具类返回的是页索引　PageIndex
  */
 public class WebTool {
 
-    public static PageIndex getPageIndex(long pagecode, int pageNow, long pageCount) {
-        long startpage = pageNow - (pagecode % 2 == 0 ? pagecode / 2 - 1 : pagecode / 2);
-        long endpage = pageNow + pagecode / 2;
+    public static PageIndex getPageIndex(long pageCode, int pageNow, long pageCount) {
+        long startpage = pageNow - (pageCode % 2 == 0 ? pageCode / 2 - 1 : pageCode / 2);
+        long endpage = pageNow + pageCode / 2;
         if (startpage < 1) {
             startpage = 1;
-            if (pageCount >= pagecode) {
-                endpage = pagecode;
+            if (pageCount >= pageCode) {
+                endpage = pageCode;
             } else {
                 endpage = pageCount;
             }
         }
         if (endpage > pageCount) {
             endpage = pageCount;
-            if ((endpage - pagecode) > 0) {
-                startpage = endpage - pagecode + 1;
+            if ((endpage - pageCode) > 0) {
+                startpage = endpage - pageCode + 1;
             } else {
                 startpage = 1;
             }
