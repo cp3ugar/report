@@ -1,5 +1,6 @@
-package indi.xk.report.utils;
+package indi.xk.report.config;
 
+import indi.xk.report.config.MyShiroRealm;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;

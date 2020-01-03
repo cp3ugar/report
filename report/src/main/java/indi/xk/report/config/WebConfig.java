@@ -1,4 +1,4 @@
-package indi.xk.report.utils;
+package indi.xk.report.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

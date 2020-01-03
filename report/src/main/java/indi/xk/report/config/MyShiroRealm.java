@@ -1,4 +1,4 @@
-package indi.xk.report.utils;
+package indi.xk.report.config;
 
 import indi.xk.report.pojo.SysPermission;
 import indi.xk.report.pojo.SysRole;

@@ -34,9 +34,16 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
-#  jpa:
-#    hibernate:
-#      ddl-auto: update  #新增数据库链接必备的参数
+  #redis
+  redis:
+    host: localhost
+    port: 6379
+    max-active: 100
+    max-wait: 30000
+    max-idle: 20
+    min-idle: 0
+    timeout: 3000
+
   jpa:
       hibernate:
         ddl-auto: update
