@@ -85,7 +85,7 @@ public class ShiroController {
             //登录成功
             //跳转到test.html
 //            return "redirect:/success";
-            model.addAttribute("subject",subject);
+            model.addAttribute("username",name);
             return "success";
         } catch (UnknownAccountException e) {
             //e.printStackTrace();

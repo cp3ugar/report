@@ -1,5 +1,6 @@
 package indi.xk.report.config;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -21,14 +22,14 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         //拦截器.
-        Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
+        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
 //        // 配置不会被拦截的链接 顺序判断
-        filterChainDefinitionMap.put("/","anon");
-        filterChainDefinitionMap.put("/img/*","anon");
-        filterChainDefinitionMap.put("/js/*","anon");
-        filterChainDefinitionMap.put("/layui/*","anon");
-        filterChainDefinitionMap.put("/toListStudent","anon");
-        filterChainDefinitionMap.put("/views/jsp/*","anon");
+        filterChainDefinitionMap.put("/", "anon");
+        filterChainDefinitionMap.put("/img/*", "anon");
+        filterChainDefinitionMap.put("/js/*", "anon");
+        filterChainDefinitionMap.put("/layui/*", "anon");
+        filterChainDefinitionMap.put("/toListStudent", "anon");
+        filterChainDefinitionMap.put("/views/jsp/*", "anon");
 
         filterChainDefinitionMap.put("/toLogin", "anon");
         filterChainDefinitionMap.put("/login", "anon");
@@ -61,5 +62,10 @@ public class ShiroConfig {
         DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
         securityManager.setRealm(myShiroRealm);
         return securityManager;
+    }
+
+    @Bean(name = "shiroDialect")
+    public ShiroDialect shiroDialect() {
+        return new ShiroDialect();
     }
 }
