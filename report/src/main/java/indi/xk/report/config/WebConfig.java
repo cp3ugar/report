@@ -3,6 +3,8 @@ package indi.xk.report.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -14,6 +16,9 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
+
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 /**
  * Created by zxy on 2020/1/3.
@@ -75,10 +80,21 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @RequestMapping("/showInvestList")
     public String showInvestList() {
         return "jsp/invest-list";
-        }
+    }
+
     //4.controller层调用：html
     @RequestMapping("/show")
     public String show(Model m) {
         return "templates/index";
-}
+    }
+
+    @Override
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+        // 解决controller返回字符串中文乱码问题
+        for (HttpMessageConverter<?> converter : converters) {
+            if (converter instanceof StringHttpMessageConverter) {
+                ((StringHttpMessageConverter) converter).setDefaultCharset(StandardCharsets.UTF_8);
+            }
+        }
+    }
 }
