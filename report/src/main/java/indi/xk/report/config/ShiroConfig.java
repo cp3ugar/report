@@ -1,6 +1,5 @@
 package indi.xk.report.config;
 
-import indi.xk.report.config.MyShiroRealm;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -24,7 +23,14 @@ public class ShiroConfig {
         //拦截器.
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
 //        // 配置不会被拦截的链接 顺序判断
-       filterChainDefinitionMap.put("/toLogin", "anon");
+        filterChainDefinitionMap.put("/","anon");
+        filterChainDefinitionMap.put("/img/*","anon");
+        filterChainDefinitionMap.put("/js/*","anon");
+        filterChainDefinitionMap.put("/layui/*","anon");
+        filterChainDefinitionMap.put("/toListStudent","anon");
+        filterChainDefinitionMap.put("/views/jsp/*","anon");
+
+        filterChainDefinitionMap.put("/toLogin", "anon");
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/testThymeleaf", "anon");
 //        //配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
@@ -33,7 +39,7 @@ public class ShiroConfig {
 //        //<!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
         filterChainDefinitionMap.put("/**", "authc");
 //        // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-        shiroFilterFactoryBean.setLoginUrl("/tologin");
+        shiroFilterFactoryBean.setLoginUrl("/toLogin");
 //        // 登录成功后要跳转的链接
 //        shiroFilterFactoryBean.setSuccessUrl("/index");
 //

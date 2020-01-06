@@ -45,14 +45,16 @@ spring:
     timeout: 3000
 
   jpa:
-      hibernate:
-        ddl-auto: update
-        naming:
-          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl #按字段名字建表
-      show-sql: true
-      database: mysql
-      database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl #按字段名字建表
+    show-sql: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   thymeleaf:
-         cache: false
-         mode: LEGACYHTML5
-         prefix: /WEB-INF/views/
+    cache: false
+    mode: HTML5
+    prefix: /WEB-INF/
+    suffix: .html
+    encoding: utf-8

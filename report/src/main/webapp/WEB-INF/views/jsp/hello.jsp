@@ -6,10 +6,9 @@
     <title>Welcome</title>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="">
-    <script type="text/javascript" src="../../js/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="../../js/jquery-3.4.1.min.js"></script>
-    <link rel="stylesheet" href="../../layui/css/layui.css">
-    <script type="text/javascript" src="../../layui/layui.js"></script>
+    <script type="text/javascript" src="../../../js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="../../../layui/css/layui.css">
+    <script type="text/javascript" src="../../../layui/layui.js"></script>
 </head>
 <style>
     #textDiv {
@@ -21,7 +20,7 @@
         font-size: 100px;
     }
 </style>
-<body background="../../img/bg.jpg" onload="startTime()">
+<body background="../../../img/bg.jpg" onload="startTime()">
 <div id="textDiv">
     <a href="/toListStudent">
         <i id="comeIn" class="layui-icon" style="font-size:80px;color: white"></i>

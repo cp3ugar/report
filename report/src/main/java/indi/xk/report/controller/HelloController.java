@@ -29,12 +29,9 @@ public class HelloController {
 //        m.addAttribute("now", DateFormat.getDateTimeInstance().format(new Date()));
 //        return "hello";
 //    }
-//    @ResponseBody
+
     @RequestMapping("/")
     public String hello() {
-
-
-
-        return "hello";
+        return "jsp/hello";
     }
 }

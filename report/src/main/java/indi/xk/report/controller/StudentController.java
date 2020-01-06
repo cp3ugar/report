@@ -24,7 +24,7 @@ public class StudentController extends BaseController{
 
     @GetMapping("/toListStudent")
     public String listStudent(){
-        return "listStudent";
+        return "jsp/listStudent";
     }
 
     @GetMapping("/listStudent")
