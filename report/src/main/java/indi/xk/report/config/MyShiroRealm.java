@@ -1,17 +1,15 @@
 package indi.xk.report.config;
 
-import indi.xk.report.pojo.SysPermission;
-import indi.xk.report.pojo.SysRole;
-import indi.xk.report.pojo.User;
 import indi.xk.report.pojo.User1;
-import org.apache.shiro.authc.*;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +21,7 @@ public class MyShiroRealm extends AuthorizingRealm {
     //权限信息，包括角色以及权限
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        System.out.println("权限配置-->MyShiroRealm.doGetAuthorizationInfo()");
+        System.out.println("<<<<<<<<<<<<<<<<权限验证>>>>>>>>>>>>>>>");
         //获取当前登录用户
         User1 user= (User1) principals.getPrimaryPrincipal();
         //通过SimpleAuthorizationInfo做授权
@@ -40,7 +38,7 @@ public class MyShiroRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token)
             throws AuthenticationException {
         //1.获取用户输入的账号
-        System.out.println("fenpei ziyuan");
+        System.out.println("<<<<<<<<<<<<<<<<身份认证>>>>>>>>>>>>>>");
         String username = (String)token.getPrincipal();
         //2.通过username从数据库中查找到user实体
         User1 user = getUserByUserName(username);
@@ -85,8 +83,8 @@ public class MyShiroRealm extends AuthorizingRealm {
         List<String> dog = new ArrayList<>(2);
         dog.add("jump");
         dog.add("basketball");
-        users.add(new User1("许可弟弟","123",true,"cat",cat));
-        users.add(new User1("孤儿","123",true,"dog",dog));
+        users.add(new User1("许可弟弟","123",true,"ROLE_CAT",cat));
+        users.add(new User1("孤儿","123",true,"ROLE_DOG",dog));
         return users;
     }
 

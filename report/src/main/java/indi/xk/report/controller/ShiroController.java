@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class ShiroController {
     /**
-     * 测试thymeleaf
-     */
-    /**
      * 测试方法
      */
     @RequestMapping("/hello")
@@ -43,48 +40,53 @@ public class ShiroController {
         return "/login";
     }
 
+    @RequestMapping("/404")
+    public String to404(){
+        return "/404";
+    }
+
+    @RequestMapping("/toError")
+    public String toError(){
+        return "/error";
+    }
+
     @RequestMapping("/success")
     public String success(){
         return "/success";
     }
+
     @RequestMapping("/noAuth")
     public String noAuth(){
-        return "/noAuth";
+        return "/403";
     }
+
     /**
      * 测试thymeleaf
      */
-
     @RequestMapping("/testThymeleaf")
     public String testThymeleaf(Model model){
         //把数据存入model
-        System.out.println("进了吗？？？？？？？？11111111111111");
         model.addAttribute("name", "黑马程序员");
         //返回test.html
         return "test";
     }
+
     /**
      * 登录逻辑处理
      */
     @RequestMapping("/login")
     public String login(String name,String password,Model model){
-        System.out.println("2222222222222222222222222");
         /**
          * 使用Shiro编写认证操作
          */
         //1.获取Subject
         Subject subject = SecurityUtils.getSubject();
-
         //2.封装用户数据
         UsernamePasswordToken token = new UsernamePasswordToken(name,password);
-
         //3.执行登录方法
         try {
             subject.login(token);
-
             //登录成功
-            //跳转到test.html
-//            return "redirect:/success";
             model.addAttribute("username",name);
             return "success";
         } catch (UnknownAccountException e) {
@@ -99,5 +101,4 @@ public class ShiroController {
             return "login";
         }
     }
-
 }

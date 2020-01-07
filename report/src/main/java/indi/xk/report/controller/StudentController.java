@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @Version 1.0
  */
 @Controller
-public class StudentController extends BaseController{
+public class StudentController {
     @Autowired
     private StudentService studentService;
 

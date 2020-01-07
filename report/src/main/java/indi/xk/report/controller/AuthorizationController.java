@@ -16,8 +16,8 @@ public class AuthorizationController {
     public String dog(){
 
         Subject subject = SecurityUtils.getSubject();
-        System.out.println( subject.hasRole("dog"));
-        if(subject.hasRole("dog")){
+        System.out.println( subject.hasRole("ROLE_DOG"));
+        if(subject.hasRole("ROLE_DOG")){
             return "dog√";
         }
         else {
@@ -28,7 +28,7 @@ public class AuthorizationController {
     @GetMapping("/cat")
     public String cat(){
         Subject subject = SecurityUtils.getSubject();
-        if(subject.hasRole("cat")){
+        if(subject.hasRole("ROLE_CAT")){
             return "cat√";
         }
         else {
@@ -38,7 +38,7 @@ public class AuthorizationController {
 
 
     @GetMapping("/sing")
-    @RequiresRoles("cat")
+    @RequiresRoles("ROLE_CAT")
     public String sing(){
         return "sing";
     }

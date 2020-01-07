@@ -23,7 +23,7 @@ import java.util.List;
  * @Version 1.0
  */
 @Controller
-public class ExportController extends BaseController{
+public class ExportController {
     @Autowired
     private StudentService studentService;
 
