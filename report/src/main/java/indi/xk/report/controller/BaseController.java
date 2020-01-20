@@ -77,8 +77,8 @@ public class BaseController {
     public String shiroException(HttpServletRequest request, HttpServletResponse response, ShiroException e) {
         e.printStackTrace();
         if (e instanceof UnauthorizedException) {
-            return "noAuth";
+            return "403";
         }
-        return "toError";
+        return "500";
     }
 }

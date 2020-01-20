@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>success</title>
+    <script type="text/javascript" src="../../../js/jquery-3.4.1.min.js"></script>
 </head>
 <body>
 <span th:text="'欢迎你,'+${username}"></span>
@@ -18,13 +19,39 @@
 <!--<hr>-->
 
 <!--使用标签后 -->
-<shiro:hasRole name="ROLE_DOG"><a href="/dog">Dog</a></shiro:hasRole>
-<shiro:hasRole name="ROLE_CAT"><a href="/cat">Cat</a></shiro:hasRole>
 <hr>
-<shiro:hasPermission name="sing"><a href="/sing">Sing</a></shiro:hasPermission>
-<shiro:hasPermission name="jump"><a href="/jump">Jump</a></shiro:hasPermission>
-<shiro:hasPermission name="rap"><a href="/rap">Rap</a></shiro:hasPermission>
-<shiro:hasPermission name="basketball"><a href="/basketball">Basketball</a></shiro:hasPermission>
-
+<!--<shiro:hasRole name="ROLE_DOG"><a href="/dog">Dog</a></shiro:hasRole>-->
+<!--<shiro:hasRole name="ROLE_CAT"><a href="/cat">Cat</a></shiro:hasRole>-->
+<a href="#" shiro:hasRole="dog">孤儿才能看到</a>
+<a href="#" shiro:hasRole="cat">弟弟才能看到</a>
+<hr>
+<!--<div id="dogTag"><a href="/dog">Dog</a></div>-->
+<!--<div id="catTag"><a href="/cat">Cat</a></div>-->
+<hr>
+<!--<shiro:hasPermission name="sing"><a href="/sing">Sing</a></shiro:hasPermission>-->
+<!--<shiro:hasPermission name="jump"><a href="/jump">Jump</a></shiro:hasPermission>-->
+<!--<shiro:hasPermission name="rap"><a href="/rap">Rap</a></shiro:hasPermission>-->
+<!--<shiro:hasPermission name="basketball"><a href="/basketball">Basketball</a></shiro:hasPermission>-->
+<hr>
 </body>
+<script>
+    // var ifHasDog = [[${subject.hasRole("ROLE_DOG")}]];
+    // var ifHasCat = [[${subject.hasRole("ROLE_CAT")}]];
+    // console.log(ifHasDog);
+    // console.log(ifHasCat);
+    // if(ifHasDog){
+    //     console.log("show");
+    //     $("#dogTag").show();
+    // }else{
+    //     console.log("hide");
+    //     $("#dogTag").hide();
+    // }
+    // if(ifHasCat){
+    //     console.log("show");
+    //     $("#catTag").show();
+    // }else{
+    //     console.log("hide");
+    //     $("#catTag").hide();
+    // }
+</script>
 </html>

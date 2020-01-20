@@ -45,9 +45,9 @@ public class ShiroController {
         return "/404";
     }
 
-    @RequestMapping("/toError")
+    @RequestMapping("/500")
     public String toError(){
-        return "/error";
+        return "/500";
     }
 
     @RequestMapping("/success")
@@ -88,6 +88,7 @@ public class ShiroController {
             subject.login(token);
             //登录成功
             model.addAttribute("username",name);
+            model.addAttribute("subject",subject);
             return "success";
         } catch (UnknownAccountException e) {
             //e.printStackTrace();

@@ -1,6 +1,6 @@
 package indi.xk.report.config;
 
-import indi.xk.report.pojo.User1;
+import indi.xk.report.pojo.ShiroUser;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -23,11 +23,12 @@ public class MyShiroRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         System.out.println("<<<<<<<<<<<<<<<<权限验证>>>>>>>>>>>>>>>");
         //获取当前登录用户
-        User1 user= (User1) principals.getPrimaryPrincipal();
+        ShiroUser user= (ShiroUser) principals.getPrimaryPrincipal();
         //通过SimpleAuthorizationInfo做授权
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         //添加角色
         authorizationInfo.addRole(user.getRole());
+        System.out.println(user.getRole());
         //添加权限
         authorizationInfo.addStringPermissions(user.getPermissions());
         return authorizationInfo;
@@ -39,9 +40,10 @@ public class MyShiroRealm extends AuthorizingRealm {
             throws AuthenticationException {
         //1.获取用户输入的账号
         System.out.println("<<<<<<<<<<<<<<<<身份认证>>>>>>>>>>>>>>");
-        String username = (String)token.getPrincipal();
+        String userName = (String)token.getPrincipal();
+        System.out.println(userName);
         //2.通过username从数据库中查找到user实体
-        User1 user = getUserByUserName(username);
+        ShiroUser user = getUserByUserName(userName);
         if(user == null){
             return null;
         }
@@ -57,14 +59,14 @@ public class MyShiroRealm extends AuthorizingRealm {
 
     }
     /**
-     * 模拟通过username从数据库中查找到user实体
-     * @param username
+     * 模拟通过userName从数据库中查找到user实体
+     * @param userName
      * @return
      */
-    private User1 getUserByUserName(String username){
-        List<User1> users1 = getUsers();
-        for(User1 user : users1){
-            if(user.getUsername().equals(username)){
+    private ShiroUser getUserByUserName(String userName){
+        List<ShiroUser> users1 = getUsers();
+        for(ShiroUser user : users1){
+            if(user.getUserName().equals(userName)){
                 return user;
             }
         }
@@ -75,16 +77,16 @@ public class MyShiroRealm extends AuthorizingRealm {
      * 模拟数据库数据
      * @return
      */
-    private List<User1> getUsers(){
-        List<User1> users = new ArrayList<>(2);
+    private List<ShiroUser> getUsers(){
+        List<ShiroUser> users = new ArrayList<>(2);
         List<String> cat = new ArrayList<>(2);
         cat.add("sing");
         cat.add("rap");
         List<String> dog = new ArrayList<>(2);
         dog.add("jump");
         dog.add("basketball");
-        users.add(new User1("许可弟弟","123",true,"ROLE_CAT",cat));
-        users.add(new User1("孤儿","123",true,"ROLE_DOG",dog));
+        users.add(new ShiroUser("弟弟","123",true,"ROLE_cat",cat));
+        users.add(new ShiroUser("孤儿","123",true,"ROLE_dog",dog));
         return users;
     }
 
