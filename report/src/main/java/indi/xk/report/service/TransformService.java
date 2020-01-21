@@ -9,4 +9,6 @@ public interface TransformService {
     void exportTransform(String idCard) throws Exception;
 
     void exportTransformScheme(String idCard) throws Exception;
+
+    void convertPdfToWord() throws Exception;
 }

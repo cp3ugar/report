@@ -149,4 +149,18 @@ public class TransformServiceImpl implements TransformService {
         }
         return result;
     }
+
+    /**
+     * PDF转Word
+     * @param
+     * @return
+     * @author xk
+     * @date 2020/1/20  16:01
+     */
+    @Override
+    public void convertPdfToWord() throws Exception {
+        File sourceFile = ResourceUtils.getFile(getClass().getClassLoader().getResource("").getPath() + "/scheme.doc");
+        Document document = new Document(sourceFile.getPath());
+        document.save("D://transform//" + sourceFile.getName() + ".pdf");
+    }
 }

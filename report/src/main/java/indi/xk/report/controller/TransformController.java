@@ -33,4 +33,9 @@ public class TransformController {
         }
         transformService.exportTransformScheme(idCard);
     }
+
+    @GetMapping("/convertPdfToWord")
+    public void convertPdfToWord() throws Exception {
+        transformService.convertPdfToWord();
+    }
 }
