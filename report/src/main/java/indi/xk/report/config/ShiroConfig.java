@@ -38,6 +38,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/404", "anon");
         filterChainDefinitionMap.put("/403", "anon");
         filterChainDefinitionMap.put("/500", "anon");
+        filterChainDefinitionMap.put("/cats/**", "anon");
 
         filterChainDefinitionMap.put("/toLogin", "anon");
         filterChainDefinitionMap.put("/login", "anon");
