@@ -11,9 +11,9 @@
     <script type="text/javascript" src="../../../layui/layui.js"></script>
 </head>
 <style>
-    #textDiv {
+    #studentHref {
         position:absolute;
-        top:50%;
+        top:40%;
         left:50%;
         transform: translate(-50%,-50%);
         color: white;
@@ -21,7 +21,7 @@
     }
 </style>
 <body background="../../../img/bg.jpg" onload="startTime()">
-<div id="textDiv">
+<div id="studentHref">
     <a href="/toListStudent">
         <i id="comeIn" class="layui-icon" style="font-size:80px;color: white"></i>
     </a>

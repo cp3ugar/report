@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by zxy on 2020/1/3.
+ *
+ * @author zxy
+ * @date 2020/1/3
  */
 @RestController
 public class AuthorizationController {

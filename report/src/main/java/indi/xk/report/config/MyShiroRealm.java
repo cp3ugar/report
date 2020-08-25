@@ -14,11 +14,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by zxy on 2020/1/2.
+ *
+ * @author zxy
+ * @date 2020/1/2
  */
 public class MyShiroRealm extends AuthorizingRealm {
 
-    //权限信息，包括角色以及权限
+    /**
+     * 权限信息，包括角色以及权限
+     * @param principals
+     * @return
+     */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         System.out.println("<<<<<<<<<<<<<<<<权限验证>>>>>>>>>>>>>>>");
@@ -34,7 +40,12 @@ public class MyShiroRealm extends AuthorizingRealm {
         return authorizationInfo;
     }
 
-    /*主要是用来进行身份认证的，也就是说验证用户输入的账号和密码是否正确。*/
+    /**
+     * 主要是用来进行身份认证的，也就是说验证用户输入的账号和密码是否正确
+     * @param token
+     * @return
+     * @throws AuthenticationException
+     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token)
             throws AuthenticationException {

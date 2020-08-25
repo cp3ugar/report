@@ -1,2 +1,9 @@
 server:
   port: 8080
+  servlet:
+    context-path: /toLogin
+spring:
+  mvc:
+    view:
+      suffix: .jsp
+      prefix: /WEB-INF/views

@@ -1,7 +1,9 @@
 package indi.xk.report.pojo;
 
 /**
- * Created by zxy on 2019/12/24.
+ *
+ * @author zxy
+ * @date 2019/12/24
  */
 public class LitigationLoan {
     private String jgmc;//机构名称

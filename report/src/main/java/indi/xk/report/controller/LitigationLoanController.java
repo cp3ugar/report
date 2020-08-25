@@ -21,7 +21,9 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * Created by zxy on 2019/12/24.
+ *
+ * @author zxy
+ * @date 2019/12/24
  */
 @Controller
 public class LitigationLoanController {
@@ -29,7 +31,7 @@ public class LitigationLoanController {
     @Autowired
     private LitigationLoanService litigationLoanService;
     @GetMapping("/listLitigationLoan")
-     public ModelAndView listlitigationLoan(){
+     public ModelAndView listLitigationLoan(){
         ModelAndView mv=new ModelAndView();
 
         List<LitigationLoan> litigationLoans=litigationLoanService.findAllLitigationLoan();
@@ -49,13 +51,13 @@ public class LitigationLoanController {
    }
     @ResponseBody
     @GetMapping("/listnum")
-    public List listnum(){
+    public List listNum(){
         List<String> numlist=litigationLoanService.numlist();
         return numlist;
     }
     @ResponseBody
     @RequestMapping(value = "listselect" ,method = RequestMethod.GET)
-    public ModelAndView listSelsct(LitigationLoan litigationLoan){
+    public ModelAndView listSelect(LitigationLoan litigationLoan){
         ModelAndView mv=new ModelAndView();
               String  jgmc=litigationLoan.getJgmc();
         System.out.println(jgmc);

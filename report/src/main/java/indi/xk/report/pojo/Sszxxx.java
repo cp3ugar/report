@@ -1,5 +1,8 @@
 package indi.xk.report.pojo;
 
+/**
+ * @author Administrator
+ */
 public class Sszxxx {
     private String zxid;
 

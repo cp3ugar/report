@@ -1,11 +1,10 @@
 package indi.xk.report.pojo;
 
+import java.util.List;
+
 /**
  * Created by zxy on 2020/1/3.
  */
-
-import java.util.List;
-
 public class ShiroUser {
     private String userName;
     private String password;

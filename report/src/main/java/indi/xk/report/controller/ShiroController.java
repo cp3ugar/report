@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * Created by zxy on 2020/1/3.
+ *
+ * @author zxy
+ * @date 2020/1/3
  */
 @Controller
 public class ShiroController {

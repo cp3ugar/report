@@ -9,7 +9,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * Created by zxy on 2020/1/2.
+ *
+ * @author zxy
+ * @date 2020/1/2
  */
 @Entity
 public class User {

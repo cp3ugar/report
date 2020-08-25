@@ -15,7 +15,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Created by zxy on 2020/1/2.
+ *
+ * @author zxy
+ * @date 2020/1/2
  */
 @Configuration
 public class ShiroConfig {
@@ -41,6 +43,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/cats/**", "anon");
 
         filterChainDefinitionMap.put("/toLogin", "anon");
+        filterChainDefinitionMap.put("/toBlogger", "anon");
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/testThymeleaf", "anon");
         //配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了

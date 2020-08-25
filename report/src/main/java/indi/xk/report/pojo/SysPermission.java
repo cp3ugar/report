@@ -8,7 +8,9 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 /**
- * Created by zxy on 2020/1/2.
+ *
+ * @author zxy
+ * @date 2020/1/2
  */
 @Entity
 public class SysPermission {
