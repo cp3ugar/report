@@ -27,10 +27,33 @@
 
     <select id="detailBlog" resultType="indi.xk.report.pojo.Blog">
         select
-        id,
-        content,
-        user_id
-        from blog
+        b.id,
+        b.content,
+        b.user_id,
+        u.`name` userName
+        from blog b
+        left join `user` u
+        on b.user_id = u.userId
         where id = #{id}
+    </select>
+
+    <!-- 列表数量 -->
+    <select id="count" resultType="Integer">
+        select count(*) from blog
+    </select>
+
+    <!-- 列表 -->
+    <select id="listBlog" resultType="indi.xk.report.pojo.Blog">
+        select
+        b.id,
+        b.user_id,
+        b.content,
+        u.`name` userName
+        from blog b
+        left join `user` u
+        on b.user_id = u.userId
+        <if test="pageView != null">
+            LIMIT #{pageView.startPage},#{pageView.pageSize}
+        </if>
     </select>
 </mapper>

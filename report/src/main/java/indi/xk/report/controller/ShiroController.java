@@ -42,6 +42,11 @@ public class ShiroController {
         return "/login";
     }
 
+    @RequestMapping("/toHello")
+    public String toHello(){
+        return "jsp/hello";
+    }
+
     @RequestMapping("/404")
     public String to404(){
         return "/404";

@@ -40,6 +40,7 @@
         <button id="importStu" type="button" class="layui-btn layui-btn-sm">导入学生</button>
         <a href="/export" id="exportStu" type="button" class="layui-btn layui-btn-sm">导出学生</a>
         <button id="importLitigation" type="button" class="layui-btn layui-btn-sm">导入诉讼台账</button>
+        <a href="/toBlog" type="button" class="layui-btn layui-btn-sm">进入博客系统</a>
     </div>
 </script>
 <script type="text/html" id="barDemo">

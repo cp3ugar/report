@@ -34,16 +34,20 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/", "anon");
         filterChainDefinitionMap.put("/img/*", "anon");
         filterChainDefinitionMap.put("/js/*", "anon");
+        filterChainDefinitionMap.put("/css/*", "anon");
         filterChainDefinitionMap.put("/layui/*", "anon");
-        filterChainDefinitionMap.put("/toListStudent", "anon");
-        filterChainDefinitionMap.put("/views/jsp/*", "anon");
         filterChainDefinitionMap.put("/404", "anon");
         filterChainDefinitionMap.put("/403", "anon");
         filterChainDefinitionMap.put("/500", "anon");
-        filterChainDefinitionMap.put("/cats/**", "anon");
+//        filterChainDefinitionMap.put("/toListStudent", "anon");
+//        filterChainDefinitionMap.put("/toMyBlog", "anon");
+//        filterChainDefinitionMap.put("/toBlog", "anon");
+//        filterChainDefinitionMap.put("/blogLogin", "anon");
+//        filterChainDefinitionMap.put("/register", "anon");
+//        filterChainDefinitionMap.put("/views/jsp/*", "anon");
+//        filterChainDefinitionMap.put("/cats/**", "anon");
 
         filterChainDefinitionMap.put("/toLogin", "anon");
-        filterChainDefinitionMap.put("/toBlogger", "anon");
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/testThymeleaf", "anon");
         //配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了

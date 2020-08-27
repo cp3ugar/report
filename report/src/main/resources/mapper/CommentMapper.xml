@@ -15,4 +15,14 @@
             #{content}
         )
     </insert>
+
+    <select id="getComments" resultType="indi.xk.report.pojo.Comment">
+        select
+        id,
+        user_id,
+        blog_id,
+        content
+        from comment
+        where blog_id = #{id}
+    </select>
 </mapper>

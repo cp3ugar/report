@@ -1,6 +1,7 @@
 package indi.xk.report.service;
 
 import indi.xk.report.pojo.Blog;
+import indi.xk.report.utils.PageView;
 
 /**
  * @Author xk
@@ -22,9 +23,9 @@ public interface BlogService {
 
     /**
      * 删除
-     * @param id
+     * @param blog
      */
-    void deleteBlog(Integer id);
+    void deleteBlog(Blog blog);
 
     /**
      * 详情
@@ -32,4 +33,11 @@ public interface BlogService {
      * @return
      */
     Blog detailBlog(Integer id);
+
+    /**
+     * 列表
+     * @param pageView
+     * @return
+     */
+    PageView<Blog> listBlog(PageView pageView);
 }

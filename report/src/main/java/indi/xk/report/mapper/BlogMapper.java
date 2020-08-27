@@ -1,7 +1,11 @@
 package indi.xk.report.mapper;
 
 import indi.xk.report.pojo.Blog;
+import indi.xk.report.pojo.dto.StudentDTO;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author xk
@@ -34,4 +38,17 @@ public interface BlogMapper {
      * @return
      */
     Blog detailBlog(Integer id);
+
+    /**
+     * count
+     * @return
+     */
+    Integer count();
+
+    /**
+     * 列表
+     * @param map
+     * @return
+     */
+    List<Blog> listBlog(Map map);
 }

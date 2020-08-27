@@ -2,6 +2,7 @@ package indi.xk.report.controller;
 
 import indi.xk.report.pojo.Comment;
 import indi.xk.report.service.CommentService;
+import indi.xk.report.utils.ReturnObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,8 +18,8 @@ public class CommentController {
     private CommentService commentService;
 
     @PostMapping("/comments")
-    private String commentBlog(Comment comment){
+    private ReturnObject commentBlog(Comment comment){
         commentService.commentBlog(comment);
-        return "评论成功";
+        return ReturnObject.outSuccess("评论成功");
     }
 }

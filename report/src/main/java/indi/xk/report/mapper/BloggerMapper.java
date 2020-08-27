@@ -1,6 +1,7 @@
 package indi.xk.report.mapper;
 
 import indi.xk.report.pojo.Blogger;
+import indi.xk.report.pojo.User;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,11 +16,18 @@ public interface BloggerMapper {
      * @param blogger
      * @return
      */
-    int login(Blogger blogger);
+    User login(Blogger blogger);
 
     /**
      * 注册
      * @param blogger
      */
     void register(Blogger blogger);
+
+    /**
+     * 通过 account 查找是否存在
+     * @param account
+     * @return
+     */
+    int findAccount(String account);
 }

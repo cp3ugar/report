@@ -3,6 +3,8 @@ package indi.xk.report.mapper;
 import indi.xk.report.pojo.Comment;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @Author xk
  * @Date 2020/8/20 18:46
@@ -15,4 +17,11 @@ public interface CommentMapper {
      * @param comment
      */
     void add(Comment comment);
+
+    /**
+     * 通过 blogId 查询评论列表
+     * @param id
+     * @return
+     */
+    List<Comment> getComments(Integer id);
 }

@@ -1,6 +1,7 @@
 package indi.xk.report.service;
 
 import indi.xk.report.pojo.Blogger;
+import indi.xk.report.pojo.User;
 
 /**
  * @Author xk
@@ -11,8 +12,9 @@ public interface BloggerService {
     /**
      * 登录
      * @param blogger
+     * @return User
      */
-    void login(Blogger blogger);
+    User login(Blogger blogger);
 
     /**
      * 注册

@@ -32,6 +32,6 @@ public class HelloController {
 
     @RequestMapping("/")
     public String hello() {
-        return "jsp/hello";
+        return "login";
     }
 }

@@ -9,45 +9,27 @@
     <script type="text/javascript" src="../../../js/jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" href="../../../layui/css/layui.css">
     <script type="text/javascript" src="../../../layui/layui.js"></script>
+    <script type="text/javascript" src="../../../js/myBlog.js"></script>
 </head>
 <body>
 <div>
-    <table id="myBlog" lay-filter="test"></table>
+    <table id="myBlog" lay-filter="test" lay-data="{id: 'idTest'}"></table>
+    <input hidden value="${sessionScope.userId}" id="userId">
 </div>
 </body>
-<script>
-    window.onload = function () {
-        layui.use(['form', 'layedit', 'laydate', 'upload', 'table', 'layer'], function () {
-            var form = layui.form
-                , layer = layui.layer
-                , laydate = layui.laydate
-                , $ = layui.jquery
-                , table = layui.table
-                , layer = layui.layer
-                , upload = layui.upload;
-
-            //博客列表
-            table.render({
-                elem: '#myBlog'
-                , cellMinWidth: 80
-                , url: '/listBlog'
-                , method: 'get'
-                , page: {
-                    layout: ['prev', 'page', 'next', 'count', 'limit', 'skip']
-                    , groups: 3
-                }
-                , skin: 'line' //行边框风格
-                , even: true //开启隔行背景
-                , size: 'lg' //小尺寸的表格
-                , toolbar: '#toolbarDemo'
-                , defaultToolbar: ['filter', 'exports']
-                , cols: [[ //表头
-                    {type: 'checkbox', fixed: 'left'}
-                    , {field: 'id', title: 'ID', sort: true, fixed: 'left'}
-                    , {field: 'content', title: '内容'}
-                    , {field: 'comment', title: '评论'}
-                ]]
-            });
-        })
-    }
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <%--        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>--%>
+        <%--        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>--%>
+        <%--        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>--%>
+        <button id="addBlog" type="button" class="layui-btn layui-btn-sm">添加博客</button>
+        <button id="detailBlog" type="button" class="layui-btn layui-btn-sm">查看博客</button>
+        <button id="editBlog" type="button" class="layui-btn layui-btn-sm">编辑博客</button>
+        <button id="commentBlog" type="button" class="layui-btn layui-btn-sm">评论博客</button>
+    </div>
+</script>
+<script type="text/html" id="barDemo">
+<%--    <a class="layui-btn layui-btn- layui-btn-xs" lay-event="edit">编辑</a>--%>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+<%--    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="comment">评论</a>--%>
 </script>
