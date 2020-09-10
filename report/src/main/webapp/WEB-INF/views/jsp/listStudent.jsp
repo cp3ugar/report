@@ -33,9 +33,6 @@
 </body>
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
-<%--        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>--%>
-<%--        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>--%>
-<%--        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>--%>
         <button id="addStu" type="button" class="layui-btn layui-btn-sm">添加学生</button>
         <button id="importStu" type="button" class="layui-btn layui-btn-sm">导入学生</button>
         <a href="/export" id="exportStu" type="button" class="layui-btn layui-btn-sm">导出学生</a>

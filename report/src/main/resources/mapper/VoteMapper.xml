@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="indi.xk.report.mapper.VoteMapper">
+    <!-- 生成投票 -->
+    <insert id="addVote" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into vote
+        (
+            user_id,
+            `title`,
+            `type`,
+            `limit`,
+            deadline,
+            amount,
+            `number`
+        )
+        values
+        (
+            #{userId},
+            #{title},
+            #{type},
+            #{limit},
+            #{deadline},
+            #{amount},
+            0
+        )
+    </insert>
+
+    <!-- 生成投票选项 -->
+    <insert id="addOption">
+        insert into `option`
+        (
+        `name`,
+        `vote_id`
+        )
+        values
+        <foreach collection="options" item="item" separator=",">
+            (
+            #{item.name},
+            #{id}
+            )
+        </foreach>
+    </insert>
+
+    <!-- 投票 -->
+    <update id="updateVote">
+        update vote
+        set `number` = `number` + 1
+        where id = #{id}
+    </update>
+
+    <!-- 添加投票记录 -->
+    <insert id="addVoteRecord">
+        insert into vote_record
+        (
+            vote_id,
+            user_id,
+            option_id
+        )
+        values
+        <if test="options.size != 0">
+            <foreach collection="options" item="item" separator=",">
+                (
+                    #{id},
+                    #{userId},
+                    #{item.name}
+                )
+            </foreach>
+        </if>
+        <if test="options.size == 0">
+            (
+                #{id},
+                #{userId},
+                #{optionId}
+            )
+        </if>
+    </insert>
+
+    <!-- 详情 -->
+    <select id="getVote" resultType="indi.xk.report.pojo.dto.VoteDTO">
+        select
+        id,
+        title,
+        `type`,
+        amount,
+        `number`,
+        `limit`,
+        user_id,
+        deadline
+        from vote
+        where id = #{id}
+    </select>
+
+    <!-- 查询投票记录 -->
+    <select id="queryVoteRecord" resultType="int">
+        select count(*)
+        from vote_record
+        where vote_id = #{id} and user_id = #{userId}
+    </select>
+
+    <!-- 列表count -->
+    <select id="count" resultType="Integer">
+        select count(*) from vote
+    </select>
+
+    <!-- 列表 -->
+    <select id="listVote" resultType="indi.xk.report.pojo.Vote">
+        select
+        id,
+        amount,
+        `number`,
+        deadline,
+        `title`
+        from vote
+        <if test="pageView != null">
+            LIMIT #{pageView.startPage},#{pageView.pageSize}
+        </if>
+    </select>
+
+    <!-- 查询选项 -->
+    <select id="getOptions" resultType="indi.xk.report.pojo.Option">
+        select
+        id,
+        `name`,
+        vote_id
+        from `option`
+        where vote_id = #{id}
+    </select>
+
+    <!-- 查询投票记录 -->
+    <select id="getVoteRecord" resultType="indi.xk.report.pojo.VoteRecord">
+        select
+        id,
+        user_id,
+        vote_id,
+        option_id
+        from vote_record
+        where vote_id = #{id};
+    </select>
+</mapper>

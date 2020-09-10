@@ -86,6 +86,7 @@ window.onload = function () {
                 var data = checkStatus.data[0]; //获取选中行的数据
                 if(!data){
                     layer.msg("请选择要查看的博客");
+                    return;
                 }
                 console.log(data);
                 $.ajax({

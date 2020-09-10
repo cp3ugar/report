@@ -19,13 +19,11 @@
 </body>
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
-        <%--        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>--%>
-        <%--        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>--%>
-        <%--        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>--%>
         <button id="addBlog" type="button" class="layui-btn layui-btn-sm">添加博客</button>
         <button id="detailBlog" type="button" class="layui-btn layui-btn-sm">查看博客</button>
         <button id="editBlog" type="button" class="layui-btn layui-btn-sm">编辑博客</button>
         <button id="commentBlog" type="button" class="layui-btn layui-btn-sm">评论博客</button>
+        <a href="/toVote" type="button" class="layui-btn layui-btn-sm">进入投票系统</a>
     </div>
 </script>
 <script type="text/html" id="barDemo">
